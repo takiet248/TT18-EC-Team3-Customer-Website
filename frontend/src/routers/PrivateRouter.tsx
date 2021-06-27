@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import {Route} from 'react-router-dom';
 
 export const PrivateRouter: React.FC<IPrivateRouter> = ({
   component: Component,

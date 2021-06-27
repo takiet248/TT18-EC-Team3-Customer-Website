@@ -1,8 +1,8 @@
-@import '../../assets/scss/variable.scss';
+@import "../../assets/scss/variable.scss";
 
 .header-footer {
   width: 100%;
-  color: white !important;
+  min-height: 100vh;
   &__header {
     position: fixed;
     left: 0;
@@ -13,14 +13,14 @@
     z-index: 100000;
   }
   &__center {
-    padding-top: 50px;
+    padding-top: 100px;
     padding-bottom: 70px;
+    min-height: 100vh;
   }
   &__container {
     width: 100%;
   }
   &__footer {
-    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;

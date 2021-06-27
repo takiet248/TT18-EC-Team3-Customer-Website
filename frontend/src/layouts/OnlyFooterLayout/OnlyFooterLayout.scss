@@ -2,15 +2,8 @@
 
 .only-footer {
   width: 100%;
-  max-width: $screen-width;
-  // background-color: $primary-color;
-  // color: white;
-  // background-color: #f3f3f3;
-  background-color: #151346;
-  color: white !important;
   min-height: 100vh;
   &__footer {
-    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
@@ -21,9 +14,9 @@
   }
   &__center {
     padding-bottom: 80px;
+    min-height: 100vh;
   }
   &__container {
     width: 100%;
-    max-width: $screen-width;
   }
 }
