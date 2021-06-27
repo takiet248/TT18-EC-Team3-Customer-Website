@@ -1,0 +1,32 @@
+@import '../../assets/scss/variable.scss';
+
+.header-footer {
+  width: 100%;
+  color: white !important;
+  &__header {
+    position: fixed;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100000;
+  }
+  &__center {
+    padding-top: 50px;
+    padding-bottom: 70px;
+  }
+  &__container {
+    width: 100%;
+  }
+  &__footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100000;
+  }
+}
