@@ -22,10 +22,5 @@ interface IPublicRouter {
   isNotifyBtn?: boolean;
 }
 
-interface ILayout {
-  sidebar?: any;
-}
 
-interface IHeader {
 
-}

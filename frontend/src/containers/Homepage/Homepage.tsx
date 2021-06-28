@@ -3,7 +3,7 @@ import React from 'react'
 export const Homepage = () => {
     return (
         <div>
-            hihi
+            <p style={{fontStyle:'italic', fontWeight: 'bold'}}>hihi</p>
         </div>
     )
 }
