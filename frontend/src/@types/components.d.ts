@@ -28,6 +28,32 @@ interface ISearchBar extends IStyle {
   onClick?: any;
 }
 
+interface IInput extends IStyle {
+  name?: string;
+  label?: string;
+  placeholder?: string;
+  value?: string;
+  type?: "text" | "password";
+  error?: any;
+  id?: string;
+  isFocus?: boolean;
+  valueOnChange?: any;
+  onClick?: any;
+}
+
+interface IAvatar {
+  image?: ?string;
+  className?: string;
+  height?: number | string;
+  width?: number | string;
+  borderRadius?: number;
+  marginRight?: number;
+  borderWidth?: number;
+  borderColor?: BorderColor | undefined;
+  marginBottom?: number;
+  flex?: Property.Flex<string | number>;
+}
+
 interface IButton extends IStyle {
   className?: string;
   color?: string;
@@ -43,4 +69,11 @@ interface IButton extends IStyle {
   border?: Property.Border<string | number>;
   disabled?: boolean;
   isWhite?: boolean;
+}
+
+interface ICalendar extends IStyle {
+  onSelect?: (time: Date) => void;
+  value: Date;
+  onChangePreAndNext: (month: any, year: any) => void;
+  // values: Array<{ countcandidate: number; datemeeting: string }>;
 }

@@ -1,7 +1,6 @@
 import React from "react";
 import "./SearchBar.scss";
-import logo from "../../assets/icons/primary.png";
-
+import {RiSearch2Line} from 'react-icons/ri';
 export const SearchBar: React.FC<ISearchBar> = ({
   className,
   id,
@@ -9,13 +8,14 @@ export const SearchBar: React.FC<ISearchBar> = ({
   placeholder,
   marginBottom,
   marginTop,
+  paddingLeft, paddingRight,
   isFocus = false,
   onClick,
 }) => {
   return (
     <div
       className={`searchbar ${className}`}
-      style={{ marginBottom, marginTop }}
+      style={{ marginBottom, marginTop, paddingLeft, paddingRight }}
     >
       <input
         id={id}
@@ -24,7 +24,7 @@ export const SearchBar: React.FC<ISearchBar> = ({
         autoComplete="off"
         autoFocus={isFocus}
       />
-
+      <RiSearch2Line className="searchbar__icon" size={25}/>
     </div>
   );
 };

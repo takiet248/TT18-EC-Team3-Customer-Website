@@ -1,0 +1,56 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.tutor {
+  width: 60%;
+  &__header {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #808080;
+    margin-bottom: 1rem;
+  }
+  &__info {
+    display: flex;
+    flex: 1;
+  }
+  &__first {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 1rem;
+  }
+  &__name {
+    display: flex;
+    align-items: center;
+    p {
+      font-weight: bold;
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+    span {
+      font-weight: bold;
+      font-size: 20px;
+      margin-left: 1rem;
+      margin-right: 2px;
+    }
+  }
+  &__location {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    a {
+      text-decoration: none;
+      color: black;
+      margin-left: 4px;
+    }
+  }
+  &__calendar{
+    display: flex;
+    justify-content: center;
+  }
+}

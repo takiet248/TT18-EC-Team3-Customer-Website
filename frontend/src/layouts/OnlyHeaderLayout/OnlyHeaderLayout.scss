@@ -1,4 +1,4 @@
-@import '../../assets/scss/variable.scss';
+@import "../../assets/scss/variable.scss";
 
 .only-header {
   width: 100%;
@@ -18,7 +18,7 @@
     width: 100%;
   }
   &__center {
-    padding-top: 50px;
+    padding-top: 80px;
     min-height: 100vh;
     &--blur {
       padding-top: 0px;
