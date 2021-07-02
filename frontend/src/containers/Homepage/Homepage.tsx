@@ -1,9 +1,10 @@
-import React from 'react'
+import React from "react";
+import { Banner } from "../../components";
 
-export const Homepage = () => {
-    return (
-        <div>
-            <p style={{fontStyle:'italic', fontWeight: 'bold'}}>hihi</p>
-        </div>
-    )
-}
+export const Homepage: React.FC = () => {
+  return (
+    <div>
+      <Banner />
+    </div>
+  );
+};
