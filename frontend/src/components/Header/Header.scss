@@ -1,5 +1,12 @@
-@import "../../assets//scss/variable.scss";
+@import "../../assets/scss/variable.scss";
+@import "../../index.scss";
 .header {
+  @include tablet {
+    justify-content: center;
+  }
+  @include mobile {
+    justify-content: center;
+  }
   background: white;
   height: 70px;
   width: 100%;
@@ -12,11 +19,33 @@
   &__logo {
     height: 50px;
     width: 180px;
+    margin: 0 16px;
+    cursor: pointer;
+    @include tablet {
+      display: none;
+    }
+    @include mobile {
+      display: none;
+    }
   }
   &__noti {
     color: #228891;
+    margin-left: 2rem;
+    cursor: pointer;
+    @include tablet {
+      display: none;
+    }
+    @include mobile {
+      display: none;
+    }
   }
   &__button-wrapper {
     display: flex;
+    @include tablet {
+      display: none;
+    }
+    @include mobile {
+      display: none;
+    }
   }
 }

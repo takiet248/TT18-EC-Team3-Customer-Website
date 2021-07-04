@@ -80,6 +80,10 @@ interface ICalendar extends IStyle {
   // values: Array<{ countcandidate: number; datemeeting: string }>;
 }
 
+interface ILabel extends IStyle {
+  icon?: any;
+  title?: string;
+}
 interface ICourse {
   name: string;
   durations: string;
