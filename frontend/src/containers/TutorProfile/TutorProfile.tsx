@@ -1,8 +1,15 @@
 import React, { useState } from "react";
-import { Avatar, Button, Calendar } from "../../components/common";
+import { Avatar, Button, Calendar, Label } from "../../components/common";
 import "./TutorProfile.scss";
-import { IoLocationOutline } from "react-icons/io5";
-import { AiFillStar } from "react-icons/ai";
+import { IoLocationOutline, IoBriefcaseSharp } from "react-icons/io5";
+import {
+  AiFillStar,
+  AiOutlineCalendar,
+  AiOutlineHeart,
+  AiOutlineWarning,
+} from "react-icons/ai";
+import { FaGraduationCap, FaChalkboardTeacher } from "react-icons/fa";
+
 import { translateDay } from "../../helpers";
 
 export const TutorProfile = () => {
@@ -52,7 +59,6 @@ export const TutorProfile = () => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
-        <br /> <br />
         <p style={{ fontWeight: "bold", fontSize: 24, marginBottom: 8 }}>
           Anh Kiet Tran
         </p>
@@ -72,6 +78,47 @@ export const TutorProfile = () => {
           why, precisely, the hand-drawn aesthetic matters for the particular
           story being told.
         </p>
+        <div className="tutor__selection">
+          <div className="tutor__selection-item">
+            <AiOutlineCalendar size={20} />
+            <p>Schedule</p>
+          </div>
+          <div className="tutor__selection-item">
+            <AiOutlineHeart size={20} />
+            <p>Like</p>
+          </div>
+          <div className="tutor__selection-item">
+            <AiOutlineWarning size={20} />
+            <p>Report</p>
+          </div>
+        </div>
+        <Label icon={<FaGraduationCap size={22} />} title={"Education"} />
+        <p className="tutor__description">
+          NSC Business Matric
+          <br />
+          National Senior Certificate
+        </p>
+        <Label
+          icon={<IoBriefcaseSharp size={20} />}
+          title={"Work Experience"}
+        />
+        <p className="tutor__description">
+          IQBar Online ESL Teacher 2018 to current <br />
+          Prepare lessons and activities tailored to students needs Assist
+          students with Exam
+          <br />
+          Preparation Use of online platform Focus on areas of improvement for
+          each individual Teaching students from basic to advanced levels
+        </p>
+        <Label
+          icon={<FaChalkboardTeacher size={20} />}
+          title={"Teaching level"}
+        />
+        <div className="tutor__teaching-level">
+          <div className="tutor__level-item">High School</div>
+          <div className="tutor__level-item">Primary School</div>
+          <div className="tutor__level-item">Secondary School</div>
+        </div>
         <div className="tutor__calendar">
           <Calendar
             onSelect={(v) => getDate(v)}

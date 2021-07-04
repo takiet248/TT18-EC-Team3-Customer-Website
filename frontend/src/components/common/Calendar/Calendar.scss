@@ -1,4 +1,5 @@
 @import "../../../assets/scss/variable.scss";
+@import "../../../index.scss";
 
 .calendar {
   padding: 24px 12px;
@@ -27,7 +28,7 @@
     align-items: center;
     padding: 6px;
     justify-content: space-between;
-    padding: 0 40px;
+    padding: 0 4%;
     margin-bottom: 8px;
     p {
       font-weight: bold;
@@ -46,12 +47,22 @@
     }
   }
   &__days {
+    &::selection {
+      background: transparent;
+    }
+    &::-moz-selection {
+      background: transparent;
+    }
     display: grid;
     grid-template-columns: repeat(7, auto);
     justify-items: center;
     gap: 2px;
     cursor: pointer;
     div {
+      @include mobile{
+        width: 30px;
+        height: 30px;
+      }
       width: 40px;
       height: 40px;
       display: flex;
@@ -62,6 +73,12 @@
       cursor: pointer;
       animation: to-top 1s forwards;
       color: black;
+      &::selection {
+        background: transparent;
+      }
+      &::-moz-selection {
+        background: transparent;
+      }
     }
   }
 
