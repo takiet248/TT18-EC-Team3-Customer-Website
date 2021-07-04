@@ -3,7 +3,7 @@
 .tutorsList-container {
   h2 {
     font: {
-      size: 36px;
+      size: 28px;
       weight: 700;
     }
     line-height: 45px;
@@ -13,11 +13,11 @@
   .tutorsList {
     margin: 0 5%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     align-items: center;
     justify-items: center;
     align-items: center;
-    grid-gap: 80px;
+    grid-gap: 10px;
     @include mobile {
       grid-template-columns: 1fr;
     }

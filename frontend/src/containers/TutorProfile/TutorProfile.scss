@@ -23,7 +23,7 @@
     display: flex;
     align-items: center;
     padding: 1rem 0;
-    border-bottom: 1px solid #808080;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     margin-bottom: 1rem;
     @include mobile {
       flex-direction: column;
@@ -129,5 +129,10 @@
       font-size: 11px;
       margin-top: 4px;
     }
+  }
+  &__courses-list{
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    padding-top: 16px;
   }
 }
