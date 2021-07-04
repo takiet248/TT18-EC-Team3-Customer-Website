@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Hoàng Đức Huy",
-      "image": "/images/tutor1.jpg",
+      "image": "./images/tutor1.jpg",
       "location": "district 1, Ho Chi Minh city",
       "teachingSubject": ["Mathematics", "Physics", "Chemical"],
       "teachingLevel": ["High school", "Secondary school"],
@@ -60,7 +60,7 @@
     {
       "id": 2,
       "name": "Nguyễn Ánh Mai",
-      "image": "/images/tutor2.jpg",
+      "image": "./images/tutor2.jpg",
       "location": "district 8, Ho Chi Minh city",
       "teachingSubject": ["Physics", "Chemical"],
       "teachingLevel": ["High school"],
@@ -232,7 +232,7 @@
     {
       "id": 5,
       "name": "Trần Quang Trung",
-      "image": "/images/tutor5.jpg",
+      "image": "/images/tutor6.jpg",
       "location": "district 1, Ho Chi Minh city",
       "teachingSubject": ["Mathematics", "Physics", "Chemical"],
       "teachingLevel": ["High school", "Secondary school"],
@@ -289,7 +289,7 @@
     {
       "id": 6,
       "name": "Phan Thị Phượng Trang",
-      "image": "/images/tutor6.jpg",
+      "image": "/images/tutor5.jpg",
       "location": "Dong Da, Hanoi",
       "teachingSubject": ["Biology", "Chemical"],
       "teachingLevel": ["High school", "Secondary school"],
@@ -464,7 +464,7 @@
     },
     {
       "id": 9,
-      "name": "Tôn Thất Quang",
+      "name": "Nguyễn Lệ Hằng",
       "image": "/images/tutor9.jpg",
       "location": "Go Vap, Ho Chi Minh city",
       "teachingSubject": ["Literature"],

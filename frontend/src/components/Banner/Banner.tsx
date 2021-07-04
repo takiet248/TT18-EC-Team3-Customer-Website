@@ -7,8 +7,8 @@ export const Banner: React.FC = () => {
     <div className="banner-container">
       <div className="banner-overlay"></div>
       <div className="banner-content">
-        <h1>Solving learning problems is easier than ever!</h1>
-        <p>Learn the subjects you need with top tutors on our platform.</p>
+        <h1>Solving problems is easier than ever!</h1>
+        <p>Learning subjects you need with top tutors on our platform.</p>
         <div className="banner-button">
           <Button width={150} height={50} fontSize={20}>
             Sign Up
