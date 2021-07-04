@@ -84,3 +84,25 @@ interface ILabel extends IStyle {
   icon?: any;
   title?: string;
 }
+interface ICourse {
+  name: string;
+  durations: string;
+  level: string;
+  subject: string;
+  rating: number;
+}
+
+interface ITutor {
+  id: number;
+  name: string;
+  image: string;
+  location: string;
+  teachingSubject: string[];
+  teachingLevel: string[];
+  rating: number;
+  isLike: number;
+  quote: string;
+  workExperience: string;
+  education: string[];
+  courses: ICourse[];
+}
