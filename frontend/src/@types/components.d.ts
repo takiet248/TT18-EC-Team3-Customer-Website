@@ -82,7 +82,7 @@ interface ICalendar extends IStyle {
 
 interface ILabel extends IStyle {
   icon?: any;
-  title?: string;
+  title?: any;
 }
 interface ICourse {
   name: string;
@@ -105,4 +105,13 @@ interface ITutor {
   workExperience: string;
   education: string[];
   courses: ICourse[];
+}
+
+interface ICourseItem {
+  id?:number;
+  name?: string;
+  durations?: string;
+  level?: string;
+  subject?: string;
+  rating?: number;
 }

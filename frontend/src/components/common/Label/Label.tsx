@@ -4,7 +4,7 @@ export const Label: React.FC<ILabel> = ({ icon, title }) => {
   return (
     <div className="label">
       <div className="label__icon">{icon}</div>
-      <p className="label__title">{title}</p>
+      <div className="label__title">{title && title}</div>
     </div>
   );
 };
