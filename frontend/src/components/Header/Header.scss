@@ -17,10 +17,11 @@
   padding: 0 24px;
   justify-content: space-between;
   &__logo {
-    height: 50px;
+    height: 70px;
     width: 180px;
     margin: 0 16px;
     cursor: pointer;
+    object-fit: contain;
     @include tablet {
       display: none;
     }
