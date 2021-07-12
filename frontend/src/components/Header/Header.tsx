@@ -21,7 +21,7 @@ export const Header: React.FC<IHeader> = ({}) => {
         <Button isWhite={true} marginRight={8}>
           Log In
         </Button>
-        <Button>Sign Up</Button>
+        <Button onClick={() => history.push("/sign-up")}>Sign Up</Button>
       </div>
     </div>
   );
