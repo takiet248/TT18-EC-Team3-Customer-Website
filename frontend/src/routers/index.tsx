@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import { Footer } from "../components";
 import { Header } from "../components/Header/Header";
-import { Homepage, TutorProfile } from "../containers";
+import { Homepage, TutorProfile, SignUp } from "../containers";
 import { HeaderFooterLayout, OnlyHeaderLayout } from "../layouts";
 import { PublicRouter } from "./PublicRouter";
 
@@ -26,6 +26,14 @@ export const Routers = () => {
           exact={true}
           path={"/tutor-profile"}
           component={TutorProfile}
+          layout={OnlyHeaderLayout}
+          header={Header}
+          isHasHeader={true}
+        />
+        <PublicRouter
+          exact={true}
+          path={"/sign-up"}
+          component={SignUp}
           layout={OnlyHeaderLayout}
           header={Header}
           isHasHeader={true}
