@@ -18,7 +18,11 @@ export const Header: React.FC<IHeader> = ({}) => {
       <SearchBar paddingRight={30} placeholder="Find your best tutor here" />
       <FiBell size={26} className="header__noti" />
       <div className="header__button-wrapper">
-        <Button isWhite={true} marginRight={8}>
+        <Button
+          isWhite={true}
+          marginRight={8}
+          onClick={() => history.push("/login")}
+        >
           Log In
         </Button>
         <Button onClick={() => history.push("/sign-up")}>Sign Up</Button>
