@@ -1,0 +1,56 @@
+@import "./../../index.scss";
+
+.signup-container {
+  display: flex;
+  @include mobile {
+    display: block;
+  }
+  .signup-image {
+    flex: 0.5;
+    img {
+      height: 100vh;
+    }
+    @include mobile {
+      display: none;
+    }
+    @include tablet {
+      display: none;
+    }
+  }
+  .signup-form {
+    flex: 0.5;
+    padding: 20px 30px;
+    @include mobile {
+      text-align: center;
+    }
+    @include tablet {
+      text-align: center;
+    }
+    h3 {
+      font: {
+        size: 20px;
+        weight: 600;
+      }
+      line-height: 21px;
+      margin-bottom: 40px;
+    }
+    p {
+      font: {
+        size: 16px;
+        weight: 500;
+      }
+      line-height: 16.5px;
+      margin-bottom: 20px;
+      .login {
+        color: #228891;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      span {
+        color: #228891;
+        font-weight: 700;
+        cursor: pointer;
+      }
+    }
+  }
+}

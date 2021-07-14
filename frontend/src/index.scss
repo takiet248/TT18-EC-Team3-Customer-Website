@@ -1,6 +1,7 @@
 @font-face {
-  font-family: 'Quicksand';
-  src: local('Quicksand'), url('./assets/fonts/Quicksand-Regular.ttf') format('truetype');
+  font-family: "Quicksand";
+  src: local("Quicksand"),
+    url("./assets/fonts/Quicksand-Regular.ttf") format("truetype");
   font-weight: normal;
 }
 // @font-face {
@@ -11,8 +12,9 @@
 // }
 
 @font-face {
-  font-family: 'Quicksand';
-  src: local('Quicksand'), url('./assets/fonts/Quicksand-Light.ttf') format('truetype');
+  font-family: "Quicksand";
+  src: local("Quicksand"),
+    url("./assets/fonts/Quicksand-Light.ttf") format("truetype");
   font-weight: 300;
 }
 // @font-face {
@@ -34,8 +36,9 @@
 // }
 
 @font-face {
-  font-family: 'Quicksand';
-  src: local('Quicksand'), url('./assets/fonts/Quicksand-Bold.ttf') format('truetype');
+  font-family: "Quicksand";
+  src: local("Quicksand"),
+    url("./assets/fonts/Quicksand-Bold.ttf") format("truetype");
   font-weight: 700;
   font-weight: bold;
 }
@@ -48,8 +51,9 @@
 // }
 
 @font-face {
-  font-family: 'Quicksand';
-  src: local('Quicsand'), url('./assets/fonts/Quicksand-Medium.ttf') format('truetype');
+  font-family: "Quicksand";
+  src: local("Quicsand"),
+    url("./assets/fonts/Quicksand-Medium.ttf") format("truetype");
   font-weight: 600;
 }
 
@@ -66,7 +70,6 @@
 //     url('./assets/font/helveticaneuecondensedblack.ttf') format('truetype');
 //   font-weight: 900;
 // }
-
 
 //reset css
 body {
@@ -91,7 +94,7 @@ code {
 }
 ::placeholder {
   // font-family: 'SVN-Segoe UI', sans-serif;
-  font-family: 'Quicksand';
+  font-family: "Quicksand";
   font-size: 14px;
   color: #656565;
 }
@@ -148,8 +151,8 @@ section,
 video,
 textarea {
   font-size: 100%;
-  font-family: 'Quicksand';
-  font-size: 15px;
+  font-family: "Quicksand";
+  font-size: 14px;
 }
 
 p {
@@ -177,7 +180,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: '';
+  content: "";
   content: none;
 }
 
@@ -202,3 +205,25 @@ input {
   background: #eeeeee;
 }
 
+//Mixins RESPONSIVE
+$mobile-width: 480px;
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+@mixin mobile {
+  @media (max-width: #{$mobile-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}

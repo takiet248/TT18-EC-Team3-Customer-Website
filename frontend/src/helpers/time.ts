@@ -113,18 +113,18 @@ export const has31Days = (month: number) => {
 
 export const regDate = new RegExp('^[0-9]+$');
 
-const getDate = (value: string): number => {
-  const date = Number.parseInt(value.substring(0, 2));
-  return date;
-};
-const getMonth = (value: string): number => {
-  const month = Number.parseInt(value.substring(3, 5));
-  return month;
-};
-const getYear = (value: string): number => {
-  const year = Number.parseInt(value.substring(6, 10));
-  return year;
-};
+// const getDate = (value: string): number => {
+//   const date = Number.parseInt(value.substring(0, 2));
+//   return date;
+// };
+// const getMonth = (value: string): number => {
+//   const month = Number.parseInt(value.substring(3, 5));
+//   return month;
+// };
+// const getYear = (value: string): number => {
+//   const year = Number.parseInt(value.substring(6, 10));
+//   return year;
+// };
 export const checkDateInput = (e: ChangeEvent<HTMLInputElement>) => {
   const value = e.target.value;
   if (!value) {

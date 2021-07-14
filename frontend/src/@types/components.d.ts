@@ -61,8 +61,10 @@ interface IButton extends IStyle {
   borderRadius?: number;
   width?: number | string;
   backgroundColor?: string;
-  onClick?: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;
-  type?: 'submit' | 'button';
+  onClick?:
+    | ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
+    | undefined;
+  type?: "submit" | "button";
   fontSize?: number;
   fontWeight?: Property.FontWeight;
   background?: string;
@@ -76,4 +78,40 @@ interface ICalendar extends IStyle {
   value: Date;
   onChangePreAndNext: (month: any, year: any) => void;
   // values: Array<{ countcandidate: number; datemeeting: string }>;
+}
+
+interface ILabel extends IStyle {
+  icon?: any;
+  title?: any;
+}
+interface ICourse {
+  name: string;
+  durations: string;
+  level: string;
+  subject: string;
+  rating: number;
+}
+
+interface ITutor {
+  id: number;
+  name: string;
+  image: string;
+  location: string;
+  teachingSubject: string[];
+  teachingLevel: string[];
+  rating: number;
+  isLike: number;
+  quote: string;
+  workExperience: string;
+  education: string[];
+  courses: ICourse[];
+}
+
+interface ICourseItem {
+  id?:number;
+  name?: string;
+  durations?: string;
+  level?: string;
+  subject?: string;
+  rating?: number;
 }
