@@ -94,7 +94,7 @@ userSchema.methods.generateAuthToken = async function() {
 
     user.sessions = user.sessions.concat({token})
     await user.save()
-    const access = jwt.sign({_id : user._id}, config.secret, {
+    const access = jwt.sign({_id : user._id, session: token}, config.secret, {
         expiresIn : config.tokenLife,
     })
     return [access, token]
