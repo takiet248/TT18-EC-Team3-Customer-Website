@@ -5,15 +5,16 @@ const config = require('../config')
 
 const auth = async(req, res, next) => {
     const token = req.header('Authorization').replace('Bearer ', '')
-    const data = jwt.verify(token, config.secret)
-    console.log(data)
     try {
-        const user = await User.findOne({ _id: data._id, 'sessions.token': token })
+        console.log(token)
+        const data = jwt.verify(token, config.secret)
+        console.log(data)
+        const user = await User.findOne({ _id: data._id, 'sessions.token': data.session })
         if (!user) {
             throw new Error()
         }
         req.user = user
-        req.token = token
+        req.token = data.session
         next()
     } catch (error) {
         res.status(401).send({ error: 'Not authorized to access this resource' })
