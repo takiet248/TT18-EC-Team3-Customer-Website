@@ -30,7 +30,7 @@ export const TutorProfile = () => {
   console.log(state);
 
   return (
-    <div className="container">
+    <div className="tutor-container">
       <div className="tutor">
         <div className="tutor__header">
           <div className="tutor__info">
@@ -56,7 +56,7 @@ export const TutorProfile = () => {
         </div>
         <iframe
           width="100%"
-          height="500"
+          height="400"
           src="https://www.youtube.com/embed/3YLg9VuCTlU"
           title="YouTube video player"
           frameBorder="0"

@@ -10,7 +10,7 @@ export const Banner: React.FC = () => {
         <h1>Solving problems is easier than ever!</h1>
         <p>Learning subjects you need with top tutors on our platform.</p>
         <div className="banner-button">
-          <Button width={150} height={50} fontSize={20}>
+          <Button width={150} height={45} fontSize={16}>
             Sign Up
           </Button>
         </div>
