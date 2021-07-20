@@ -1,0 +1,72 @@
+@import "./../../index.scss";
+@import "../../assets/scss/variable.scss";
+
+.login {
+  width: 100%;
+  display: flex;
+  &__image {
+    flex: 0.5;
+    img {
+      height: 100vh;
+      object-fit: cover;
+    }
+    @include mobile {
+      display: none;
+    }
+    @include tablet {
+      display: none;
+    }
+  }
+  &__container {
+    flex: 0.5;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    @include tablet {
+      flex: auto;
+      width: 100%;
+      align-items: center;
+    }
+  }
+  &__form {
+    width: 70%;
+    @include tablet {
+      width: 80%;
+    }
+    @include mobile {
+      width: 100%;
+    }
+    .MuiFormControl-root {
+      width: 100% !important;
+      margin-bottom: 1rem !important;
+    }
+
+    h3 {
+      font: {
+        size: 20px;
+        weight: 600;
+      }
+      line-height: 21px;
+      margin-bottom: 40px;
+    }
+    p {
+      font: {
+        size: 16px;
+        weight: 500;
+      }
+      line-height: 16.5px;
+      margin-bottom: 20px;
+      .login {
+        color: $primary-color;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      span {
+        color: $primary-color;
+        font-weight: 700;
+        cursor: pointer;
+      }
+    }
+  }
+}

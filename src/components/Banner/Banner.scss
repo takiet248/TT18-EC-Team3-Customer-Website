@@ -5,8 +5,9 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 600px;
+  height: 400px;
   position: relative;
+  width: 100%;
 
   .banner-overlay {
     position: absolute;
@@ -23,29 +24,19 @@
     top: 50%;
     left: 5%;
     transform: translateY(-50%);
-    @include mobile {
-      top: 40%;
+    @include tablet{
       width: 100%;
-      text-align: center;
+      padding: 1rem;
       left: 0;
-      padding: 0 10px;
     }
+
     h1 {
       font: {
-        size: 50px;
+        size: 40px;
         weight: 800;
       }
       letter-spacing: 2px;
-      line-height: 60px;
       margin-bottom: 20px;
-      @include mobile {
-        font: {
-          size: 30px;
-          weight: 700;
-        }
-        line-height: 35px;
-        margin-bottom: 10px;
-      }
     }
     p {
       margin-bottom: 20px;
@@ -53,27 +44,8 @@
         size: 18px;
         weight: 600;
       }
-      letter-spacing: 2px;
-      line-height: 20px;
-      @include mobile {
-        margin-bottom: 10px;
-        font: {
-          size: 14px;
-          weight: 500;
-        }
-        line-height: 14px;
-      }
     }
     .banner-button {
-      @include mobile {
-        display: flex;
-        justify-content: center;
-        button {
-          width: 100px !important;
-          height: 30px !important;
-          font-size: 16px !important;
-        }
-      }
     }
   }
 }

@@ -3,7 +3,7 @@ import { Banner, TutorsList, Introduction } from "../../components";
 
 export const Homepage: React.FC = () => {
   return (
-    <div>
+    <div style={{width: '100%'}}>
       <Banner />
       <TutorsList />
       <Introduction />
