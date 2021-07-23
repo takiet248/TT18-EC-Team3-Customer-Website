@@ -1,5 +1,7 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
+import { Homepage } from "../containers";
+import { isAuth } from "../helpers";
 
 export const PublicRouter: React.FC<IPublicRouter> = ({
   component: Component,
@@ -13,6 +15,7 @@ export const PublicRouter: React.FC<IPublicRouter> = ({
 }) => {
   return (
     <Route
+      // render={() => (isAuth() ? <Redirect to="/login" /> : <Homepage />)}
       exact={exact}
       path={path}
       render={(props) => {

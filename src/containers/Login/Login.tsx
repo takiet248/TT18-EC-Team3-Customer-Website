@@ -1,10 +1,24 @@
 import "./Login.scss";
 import { Button, Input } from "../../components/common";
-import { useHistory } from "react-router";
+import { useForm } from "react-hook-form";
+import { doLogin } from "../../redux/actions/userActions";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
+type FormValues = {
+  email: string;
+  password: string;
+};
 export const Login = () => {
+  const dispatch = useDispatch();
+  const { register, handleSubmit, getValues } = useForm<FormValues>();
+  const token = localStorage.getItem("access");
 
-  const history = useHistory();
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+    dispatch(doLogin(getValues("email"), getValues("password")));
+  };
   return (
     <div className="register">
       <div className="register__image">
@@ -13,21 +27,18 @@ export const Login = () => {
           alt="sign up image"
         />
       </div>
-      <form className="register__container">
+      <form className="register__container" onSubmit={handleSubmit(onSubmit)}>
         <div className="register__form">
           <h3>Welcome back to Amitu!</h3>
           <p>Login with your email address</p>
-          <Input placeholder="Email" />
-          <Input placeholder="Password" />
+          <Input placeholder="Email" {...register("email")} />
+          <Input placeholder="Password" {...register("password")} />
 
-          <Button width="100%" marginBottom={20}>
+          <Button width="100%" marginBottom={20} type="submit">
             Login
           </Button>
           <p>
-            New to Amitu?{" "}
-            <span className="signup" onClick={() => history.push("/sign-up")}>
-              Sign up
-            </span>
+            New to Amitu? <span className="signup">Sign up</span>
           </p>
         </div>
       </form>
