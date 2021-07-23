@@ -1,10 +1,48 @@
 import "./SignUp.scss";
-import TextField from "@material-ui/core/TextField";
-import { Button } from "../../components/common";
+import { Button, Input } from "../../components/common";
 import { useHistory } from "react-router";
+import { useForm } from "react-hook-form";
+import { doRegister } from "../../redux/actions/userActions";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
+type FormValues = {
+  name: string;
+  email: string;
+  password: string;
+  phone: number;
+  address: string;
+  gender: boolean;
+  DOB: string;
+};
 export const SignUp = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setValue("gender", true);
+  }, []);
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    getValues,
+  } = useForm<FormValues>();
+  const onSubmit = (data: any) => {
+    console.log(data);
+    dispatch(
+      doRegister(
+        getValues("name"),
+        getValues("email"),
+        getValues("password"),
+        getValues("phone"),
+        getValues("address"),
+        getValues("gender"),
+        getValues("DOB")
+      )
+    );
+    
+  };
 
   return (
     <div className="register">
@@ -14,30 +52,17 @@ export const SignUp = () => {
           alt="sign up image"
         />
       </div>
-      <form className="register__container">
+      <form className="register__container" onSubmit={handleSubmit(onSubmit)}>
         <div className="register__form">
           <h3>Start learning with your favorite tutors in our platform now!</h3>
           <p>Sign up with your email address</p>
-          <TextField
-            label="Email"
-            type="email"
-            variant="outlined"
-            name="email"
-            fullWidth
-          />
-          <TextField
-            label="Password"
-            type="password"
-            variant="outlined"
-            name="password"
-          />
-          <TextField
-            label="Confirm Password"
-            type="password"
-            variant="outlined"
-            name="password"
-          />
-          <Button width="100%" marginBottom={20}>
+          <Input placeholder="Name" {...register("name")} />
+          <Input placeholder="Email" {...register("email")} />
+          <Input placeholder="Password" {...register("password")} />
+          <Input placeholder="Phone" {...register("phone")} />
+          <Input placeholder="Address" {...register("address")} />
+          <Input placeholder="Day of birth" {...register("DOB")} />
+          <Button width="100%" marginBottom={20} type="submit">
             Sign Up
           </Button>
           <p>

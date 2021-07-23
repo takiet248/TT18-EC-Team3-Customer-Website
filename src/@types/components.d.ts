@@ -39,6 +39,8 @@ interface IInput extends IStyle {
   isFocus?: boolean;
   valueOnChange?: any;
   onClick?: any;
+  onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
+  onBlur?: React.FocusEventHandler<HTMLInputElement> | undefined;
 }
 
 interface IAvatar {
@@ -108,7 +110,7 @@ interface ITutor {
 }
 
 interface ICourseItem {
-  id?:number;
+  id?: number;
   name?: string;
   durations?: string;
   level?: string;
