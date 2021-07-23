@@ -1,6 +1,5 @@
 import "./SignUp.scss";
-import TextField from "@material-ui/core/TextField";
-import { Button } from "../../components/common";
+import { Button, Input } from "../../components/common";
 import { useHistory } from "react-router";
 
 export const SignUp = () => {
@@ -18,25 +17,15 @@ export const SignUp = () => {
         <div className="register__form">
           <h3>Start learning with your favorite tutors in our platform now!</h3>
           <p>Sign up with your email address</p>
-          <TextField
-            label="Email"
-            type="email"
-            variant="outlined"
-            name="email"
-            fullWidth
-          />
-          <TextField
-            label="Password"
-            type="password"
-            variant="outlined"
-            name="password"
-          />
-          <TextField
-            label="Confirm Password"
-            type="password"
-            variant="outlined"
-            name="password"
-          />
+          <Input placeholder="Name" />
+          <Input placeholder="Email" />
+          <Input placeholder="Password" />
+          <Input placeholder="Phone" />
+          <Input placeholder="Address" />
+          <Input placeholder="Day of birth" />
+
+
+
           <Button width="100%" marginBottom={20}>
             Sign Up
           </Button>

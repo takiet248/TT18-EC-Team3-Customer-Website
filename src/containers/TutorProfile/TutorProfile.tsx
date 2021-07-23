@@ -27,7 +27,6 @@ export const TutorProfile = () => {
   //handle move to next month on calendar
   const onChangePreAndNext = (month: any, year: any) => {};
   const { state } = useLocation<any>();
-  console.log(state);
 
   return (
     <div className="tutor-container">

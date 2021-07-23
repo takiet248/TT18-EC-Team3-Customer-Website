@@ -1,9 +1,9 @@
 import "./Login.scss";
-import TextField from "@material-ui/core/TextField";
-import { Button } from "../../components/common";
+import { Button, Input } from "../../components/common";
 import { useHistory } from "react-router";
 
 export const Login = () => {
+
   const history = useHistory();
   return (
     <div className="register">
@@ -16,21 +16,9 @@ export const Login = () => {
       <form className="register__container">
         <div className="register__form">
           <h3>Welcome back to Amitu!</h3>
-          <p>Login with your email address:</p>
-          <TextField
-            label="Email"
-            type="email"
-            variant="outlined"
-            name="email"
-            fullWidth
-          />
-
-          <TextField
-            label="Password"
-            type="password"
-            variant="outlined"
-            name="password"
-          />
+          <p>Login with your email address</p>
+          <Input placeholder="Email" />
+          <Input placeholder="Password" />
 
           <Button width="100%" marginBottom={20}>
             Login
