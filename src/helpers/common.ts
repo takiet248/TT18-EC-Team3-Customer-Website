@@ -15,6 +15,11 @@ export const checkFocus = (
   return pathName.includes(path);
 };
 
+export const logout = () => {
+  window.location.replace("/login");
+  window.localStorage.clear();
+};
+
 // export const logout = () => {
 //   window.location.replace('/login');
 //   localStorage.removeItem(EToken.TokenJobs);
@@ -133,8 +138,8 @@ export const formDate = (time: any): any => {
   return moment(time).format("DD/MM/YYYY");
 };
 
-export const isAuth= () => {
-  if (!localStorage.getItem("access")) {
+export const isAuth = () => {
+  if (!localStorage.getItem("localStorage@access")) {
     return true;
   }
   return false;

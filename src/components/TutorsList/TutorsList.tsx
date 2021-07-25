@@ -1,3 +1,4 @@
+import React from "react";
 import "./TutorsList.scss";
 import data from "./../../data.json";
 import { Tutor } from "../Tutor/Tutor";

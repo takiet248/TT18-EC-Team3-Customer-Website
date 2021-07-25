@@ -15,9 +15,10 @@ export const Tutor: React.FC<Props> = ({ tutor }) => {
   const { name, image, location, teachingSubject, teachingLevel, rating } =
     tutor;
   const history = useHistory();
-  const [test, setTest] = useState("");
+  const [, setTest] = useState("");
   useEffect(() => {
     setTest(teachingSubject.join());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div
@@ -41,7 +42,7 @@ export const Tutor: React.FC<Props> = ({ tutor }) => {
       }}
     >
       <div className="tutor-item__image">
-        <img src={image} />
+        <img src={image} alt=""/>
       </div>
       <div className="tutor-item__info">
         <div className="tutor-item__header">
