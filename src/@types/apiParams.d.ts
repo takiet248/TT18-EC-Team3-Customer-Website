@@ -7,3 +7,8 @@ interface IParamsRegister {
   gender: boolean;
   DOB: string;
 }
+
+interface IParamsLogin {
+  username: string;
+  password: string;
+}

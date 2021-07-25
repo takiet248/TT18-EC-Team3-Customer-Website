@@ -1,7 +1,7 @@
 import React from "react";
 import "./Footer.scss";
 
-export const Footer: React.FC<IHeader> = ({}) => {
+export const Footer = () => {
   return (
     <div>
       <footer className="footer">
@@ -9,13 +9,13 @@ export const Footer: React.FC<IHeader> = ({}) => {
           <h2>About us</h2>
           <ul>
             <li>
-              <a href="#">Introduction</a>
+              <p>Introduction</p>
             </li>
             <li>
-              <a href="#">Tutors</a>
+              <p>Tutors</p>
             </li>
             <li>
-              <a href="#">Blogs</a>
+              <p>Blogs</p>
             </li>
           </ul>
         </div>
@@ -23,13 +23,13 @@ export const Footer: React.FC<IHeader> = ({}) => {
           <h2>Join with us</h2>
           <ul>
             <li>
-              <a href="#">Our tutors</a>
+              <p>Our tutors</p>
             </li>
             <li>
-              <a href="#">Become a tutor</a>
+              <p>Become a tutor</p>
             </li>
             <li>
-              <a href="#">Careers</a>
+              <p>Careers</p>
             </li>
           </ul>
         </div>

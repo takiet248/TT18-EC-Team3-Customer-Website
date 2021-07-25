@@ -1,10 +1,9 @@
+import React from 'react';
 import "./SignUp.scss";
 import { Button, Input } from "../../components/common";
 import { useHistory } from "react-router";
 import { useForm } from "react-hook-form";
-import { doRegister } from "../../redux/actions/userActions";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+// import { doRegister } from "../../redux/actions/userActions";
 
 type FormValues = {
   name: string;
@@ -17,30 +16,25 @@ type FormValues = {
 };
 export const SignUp = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    setValue("gender", true);
-  }, []);
+ 
   const {
     register,
     handleSubmit,
-    setValue,
-    getValues,
   } = useForm<FormValues>();
   const onSubmit = (data: any) => {
     console.log(data);
-    dispatch(
-      doRegister(
-        getValues("name"),
-        getValues("email"),
-        getValues("password"),
-        getValues("phone"),
-        getValues("address"),
-        getValues("gender"),
-        getValues("DOB")
-      )
-    );
+    // dispatch(
+    //   doRegister(
+    //     getValues("name"),
+    //     getValues("email"),
+    //     getValues("password"),
+    //     getValues("phone"),
+    //     getValues("address"),
+    //     getValues("gender"),
+    //     getValues("DOB")
+    //   )
+    // );
     
   };
 
@@ -49,7 +43,7 @@ export const SignUp = () => {
       <div className="register__image">
         <img
           src="https://www.cambly.com/fe/static/signup_illustration.png"
-          alt="sign up image"
+          alt="signupimage"
         />
       </div>
       <form className="register__container" onSubmit={handleSubmit(onSubmit)}>

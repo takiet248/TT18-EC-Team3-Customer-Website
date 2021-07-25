@@ -1,30 +1,37 @@
+import React from 'react';
 import "./Login.scss";
 import { Button, Input } from "../../components/common";
 import { useForm } from "react-hook-form";
-import { doLogin } from "../../redux/actions/userActions";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+// import { useAppDispatch } from "../../redux/store";
+// import { doLogin } from "../../redux";
+// import { unwrapResult } from "@reduxjs/toolkit";
+// import { EToken } from "../../constants";
 
 type FormValues = {
   email: string;
   password: string;
 };
 export const Login = () => {
-  const dispatch = useDispatch();
-  const { register, handleSubmit, getValues } = useForm<FormValues>();
-  const token = localStorage.getItem("access");
-
+  // const dispatch = useAppDispatch();
+  const { register, handleSubmit } = useForm<FormValues>();
 
   const onSubmit = (data: any) => {
-    console.log(data);
-    dispatch(doLogin(getValues("email"), getValues("password")));
+    // dispatch(doLogin(data))
+    //   .then(unwrapResult)
+    //   .then((res: IResLogin) => {
+    //     if (res) {
+    //       const token = res.access;
+    //       window.localStorage.setItem(EToken.accessToken, token);
+    //       window.location.reload;
+    //     }
+    //   });
   };
   return (
     <div className="register">
       <div className="register__image">
         <img
           src="https://www.cambly.com/fe/static/login_illustration_big.png"
-          alt="sign up image"
+          alt="signupimage"
         />
       </div>
       <form className="register__container" onSubmit={handleSubmit(onSubmit)}>

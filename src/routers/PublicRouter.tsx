@@ -1,7 +1,5 @@
 import React from "react";
-import { Redirect, Route } from "react-router-dom";
-import { Homepage } from "../containers";
-import { isAuth } from "../helpers";
+import { Route } from "react-router-dom";
 
 export const PublicRouter: React.FC<IPublicRouter> = ({
   component: Component,

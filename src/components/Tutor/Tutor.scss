@@ -1,21 +1,21 @@
-$radius: 10px;
+
 .tutor-item {
   cursor: pointer;
   min-height: 300px;
-  border-radius: $radius;
+  border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   max-height: 340px;
   width: 100%;
   &__image {
-    border-top-right-radius: $radius;
-    border-top-left-radius: $radius;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
     height: 150px;
     background-color: aqua;
     img {
       height: 150px;
       object-fit: cover;
-      border-top-right-radius: $radius;
-      border-top-left-radius: $radius;
+      border-top-right-radius: 10px;
+      border-top-left-radius: 10px;
     }
   }
   &__title {
@@ -24,7 +24,7 @@ $radius: 10px;
   }
   &__header {
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     margin-bottom: 8px;
   }
   &__name {

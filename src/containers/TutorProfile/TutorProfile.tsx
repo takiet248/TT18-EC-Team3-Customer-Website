@@ -17,7 +17,7 @@ import { ScrollHorizontal } from "../../components/common/ScrollHorizontal/Scrol
 
 export const TutorProfile = () => {
   const [date, setDate] = useState(new Date());
-  const [day, setDay] = useState(translateDay(new Date()));
+  const [, setDay] = useState(translateDay(new Date()));
 
   const getDate = (date: Date) => {
     setDate(date);
@@ -44,7 +44,7 @@ export const TutorProfile = () => {
                 <IoLocationOutline size={20} />
                 <a
                   href={`http://maps.google.com/?q=${state.location}`}
-                  target="_blank"
+                  target="_blank" rel="noreferrer"
                 >
                   {state.location}
                 </a>

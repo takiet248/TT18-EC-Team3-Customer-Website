@@ -1,24 +1,20 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Header.scss";
 import logo from "../../assets/icons/primary.png";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { FiBell } from "react-icons/fi";
 import { Button } from "../common";
 import { useHistory } from "react-router";
-import { useDispatch } from "react-redux";
-import { doLogOut } from "../../redux/actions/userActions";
 
-export const Header: React.FC<IHeader> = ({}) => {
+export const Header = () => {
   const history = useHistory();
   const token = localStorage.getItem("access");
-  const dispatch = useDispatch();
-  useEffect(() => {
-    token !== null && console.log("hihi");
-  }, []);
+
   return (
     <div className="header">
       <img
         src={logo}
+        alt=""
         className="header__logo"
         onClick={() => history.push("/")}
       />
@@ -36,13 +32,7 @@ export const Header: React.FC<IHeader> = ({}) => {
           <Button onClick={() => history.push("/sign-up")}>Sign Up</Button>
         </div>
       ) : (
-        <Button
-          onClick={() => {
-            dispatch(doLogOut());
-          }}
-        >
-          Log Out
-        </Button>
+        <Button onClick={() => {}}>Log Out</Button>
       )}
     </div>
   );

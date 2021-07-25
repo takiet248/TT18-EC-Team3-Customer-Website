@@ -14,7 +14,7 @@ export const CourseItem: React.FC<ICourseItem> = ({
   return (
     <div className="course-item" key={id}>
       <div className="course-item__image">
-          <img src="https://hacentre.edu.vn/wp-content/uploads/2020/10/tu-vung-ielts-speaking-chu-de-study-work-19.jpg"></img>
+        <img src="https://hacentre.edu.vn/wp-content/uploads/2020/10/tu-vung-ielts-speaking-chu-de-study-work-19.jpg" alt=""></img>
       </div>
       <div className="course-item__info">
         <div className="course-item__header">
