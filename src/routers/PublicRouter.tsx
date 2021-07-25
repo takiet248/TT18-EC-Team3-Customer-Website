@@ -19,6 +19,7 @@ export const PublicRouter: React.FC<IPublicRouter> = ({
       exact={exact}
       path={path}
       render={(props) => {
+        
         return (
           <Layout
             header={isHasHeader ? <Header /> : <></>}

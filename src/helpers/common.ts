@@ -133,7 +133,7 @@ export const formDate = (time: any): any => {
   return moment(time).format("DD/MM/YYYY");
 };
 
-export const isAuth= () => {
+export const isAuth = () => {
   if (!localStorage.getItem("access")) {
     return true;
   }

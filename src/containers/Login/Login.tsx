@@ -14,7 +14,6 @@ export const Login = () => {
   const { register, handleSubmit, getValues } = useForm<FormValues>();
   const token = localStorage.getItem("access");
 
-
   const onSubmit = (data: any) => {
     console.log(data);
     dispatch(doLogin(getValues("email"), getValues("password")));
