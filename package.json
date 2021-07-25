@@ -15,10 +15,11 @@
     "@types/jest": "^26.0.23",
     "@types/node": "^12.20.15",
     "@types/react": "^17.0.11",
+    "@types/react-router-dom": "^5.1.8",
     "axios": "^0.21.1",
     "moment": "^2.29.1",
     "react": "^16.14.0",
-    "react-dom": "^16.13.1",
+    "react-dom": "^16.14.0",
     "react-hook-form": "^7.11.1",
     "react-icons": "^4.2.0",
     "react-redux": "^7.2.4",
@@ -28,8 +29,7 @@
     "redux-thunk": "^2.3.0",
     "sass": "^1.35.1",
     "serve": "^12.0.0",
-    "typescript": "^4.3.4",
-    "@types/react-router-dom": "^5.1.8"
+    "typescript": "^4.3.4"
   },
   "scripts": {
     "start": "serve -s build",
@@ -57,5 +57,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/react-dom": "^17.0.9"
+  }
 }
