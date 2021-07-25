@@ -95,18 +95,14 @@ interface ICourse {
 }
 
 interface ITutor {
-  id: number;
-  name: string;
-  image: string;
-  location: string;
-  teachingSubject: string[];
-  teachingLevel: string[];
-  rating: number;
-  isLike: number;
-  quote: string;
-  workExperience: string;
-  education: string[];
-  courses: ICourse[];
+  _id?: string;
+  name?: string;
+  avatar?: string;
+  address: string;
+  major?: Array<IResMajor>;
+  course?: Array<IResCourse>;
+  rating?: number;
+  handleGotoDetail?: React.MouseEventHandler<HTMLDivElement>;
 }
 
 interface ICourseItem {

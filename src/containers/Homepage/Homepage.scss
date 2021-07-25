@@ -1,0 +1,19 @@
+@import '../../assets/scss/variable.scss';
+.home {
+  width: 100%;
+  &__list-grid {
+    margin: 3rem 5%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: center;
+    justify-items: center;
+    align-items: center;
+    grid-gap: 10px;
+    @include tablet {
+      grid-template-columns: 1fr 1fr;
+    }
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+}

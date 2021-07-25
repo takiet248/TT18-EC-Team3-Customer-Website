@@ -9,20 +9,27 @@ export const Input = React.forwardRef<any, IInput>(
       placeholder,
       marginBottom,
       marginTop,
+      marginRight,
+      marginLeft,
       isFocus = false,
+      type,
       onChange,
       onBlur,
     },
     ref
   ) => {
     return (
-      <div className={`input ${className}`} style={{ marginBottom, marginTop }}>
+      <div
+        className={`input ${className}`}
+        style={{ marginBottom, marginTop, marginRight, marginLeft }}
+      >
         <input
           autoFocus={isFocus}
           placeholder={placeholder}
           name={name}
           onBlur={onBlur}
           onChange={onChange}
+          type={type}
           ref={ref}
         />
       </div>

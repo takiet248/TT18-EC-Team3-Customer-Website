@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar, Button, Calendar, Label } from "../../components/common";
 import "./TutorProfile.scss";
 import { IoLocationOutline, IoBriefcaseSharp } from "react-icons/io5";
@@ -9,15 +9,26 @@ import {
   AiOutlineWarning,
 } from "react-icons/ai";
 import { FaGraduationCap, FaChalkboardTeacher } from "react-icons/fa";
-
 import { translateDay } from "../../helpers";
-import { useLocation } from "react-router";
-import { CourseItem } from "../../components";
+import { useParams } from "react-router";
 import { ScrollHorizontal } from "../../components/common/ScrollHorizontal/ScrollHorizontal";
+import { useAppDispatch } from "../../redux/store";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/rootReducer";
+import { doGetAllListTutor, doGetOneTutor } from "../../redux";
 
 export const TutorProfile = () => {
+  const dispatch = useAppDispatch();
   const [date, setDate] = useState(new Date());
   const [, setDay] = useState(translateDay(new Date()));
+  const { uid } = useParams<{ uid: string }>();
+
+  const oneTutor = useSelector((state: RootState) => state.tutorSlice.tutor);
+
+  useEffect(() => {
+    dispatch(doGetAllListTutor());
+    dispatch(doGetOneTutor({ uid: uid }));
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getDate = (date: Date) => {
     setDate(date);
@@ -26,32 +37,34 @@ export const TutorProfile = () => {
 
   //handle move to next month on calendar
   const onChangePreAndNext = (month: any, year: any) => {};
-  const { state } = useLocation<any>();
 
   return (
     <div className="tutor-container">
       <div className="tutor">
         <div className="tutor__header">
           <div className="tutor__info">
-            <Avatar image={state.image} height={80} width={80} />
+            <Avatar image={oneTutor.avatar} height={80} width={80} />
             <div className="tutor__first">
               <div className="tutor__name">
-                <p>{state.name}</p>
-                <span>{state.rating} </span>
+                <p>{oneTutor.name}</p>
+                <span>{oneTutor.rating} </span>
                 <AiFillStar size={20} color="#EEA320" />
               </div>
               <span className="tutor__location">
                 <IoLocationOutline size={20} />
                 <a
-                  href={`http://maps.google.com/?q=${state.location}`}
-                  target="_blank" rel="noopener noreferrer"
+                  href={`http://maps.google.com/?q=${oneTutor.address}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  {state.location}
+                  {oneTutor.address}
                 </a>
               </span>
             </div>
           </div>
-          <Button width={180}>BOOK</Button>
+          <Button width={180} marginLeft={16}>
+            BOOK
+          </Button>
         </div>
         <iframe
           width="100%"
@@ -62,10 +75,17 @@ export const TutorProfile = () => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
-        <p style={{ fontWeight: "bold", fontSize: 24, marginBottom: 8, marginTop: 16 }}>
-          {state.name}
+        <p
+          style={{
+            fontWeight: "bold",
+            fontSize: 24,
+            marginBottom: 8,
+            marginTop: 16,
+          }}
+        >
+          {oneTutor.name}
         </p>
-        <p>{state.quote}</p>
+        <p>{oneTutor.quote}</p>
         <div className="tutor__selection">
           <div className="tutor__selection-item">
             <AiOutlineCalendar size={20} />
@@ -82,8 +102,8 @@ export const TutorProfile = () => {
         </div>
         <Label icon={<FaGraduationCap size={22} />} title={"Education"} />
         <div className="tutor__description">
-          {state.education.map((item: any, index: number) => {
-            return <div key={index}>{item}</div>;
+          {oneTutor?.degree?.map((item: any, index: number) => {
+            return <div key={index}>{item.item}</div>;
           })}
         </div>
 
@@ -91,32 +111,32 @@ export const TutorProfile = () => {
           icon={<IoBriefcaseSharp size={20} />}
           title={"Work Experience"}
         />
-        <p className="tutor__description">{state.workExperience}</p>
+        <p className="tutor__description">{oneTutor.exp}</p>
         <Label
           icon={<FaChalkboardTeacher size={20} />}
           title={"Teaching level"}
         />
         <div className="tutor__teaching-level">
-          {state.teachingLevel.map((item: any, index: number) => {
+          {oneTutor.major?.map((item: any, index: number) => {
             return (
               <div className="tutor__level-item" key={index}>
-                {item}
+                {item.item}
               </div>
             );
           })}
         </div>
 
         <div className="tutor__courses-list">
-        <p style={{ fontWeight: "bold", fontSize: 18, marginBottom: 8 }}>
-          {state.name} teaches these courses
-        </p>
+          <p style={{ fontWeight: "bold", fontSize: 18, marginBottom: 8 }}>
+            {oneTutor.name} teaches these courses
+          </p>
           <ScrollHorizontal
             paddingLeft={8}
             marginBottom={16}
             marginTop={16}
             paddingBottom={8}
           >
-            {state.courses.map((item: any, index: number) => {
+            {/* {state.courses.map((item: any, index: number) => {
               return (
                 <CourseItem
                   key={index}
@@ -127,7 +147,7 @@ export const TutorProfile = () => {
                   level={item.level}
                 />
               );
-            })}
+            })} */}
           </ScrollHorizontal>
         </div>
 
