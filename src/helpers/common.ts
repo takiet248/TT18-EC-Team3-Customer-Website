@@ -139,7 +139,7 @@ export const formDate = (time: any): any => {
 };
 
 export const isAuth = () => {
-  if (!localStorage.getItem("access")) {
+  if (!localStorage.getItem("localStorage@access")) {
     return true;
   }
   return false;

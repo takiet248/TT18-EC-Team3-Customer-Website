@@ -1,30 +1,30 @@
-import React from 'react';
+import React from "react";
 import "./Login.scss";
 import { Button, Input } from "../../components/common";
 import { useForm } from "react-hook-form";
-// import { useAppDispatch } from "../../redux/store";
-// import { doLogin } from "../../redux";
-// import { unwrapResult } from "@reduxjs/toolkit";
-// import { EToken } from "../../constants";
+import { doLogin } from "../../redux";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { EToken } from "../../constants";
+import { useAppDispatch } from "../../redux/store";
 
 type FormValues = {
   email: string;
   password: string;
 };
 export const Login = () => {
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const { register, handleSubmit } = useForm<FormValues>();
 
   const onSubmit = (data: any) => {
-    // dispatch(doLogin(data))
-    //   .then(unwrapResult)
-    //   .then((res: IResLogin) => {
-    //     if (res) {
-    //       const token = res.access;
-    //       window.localStorage.setItem(EToken.accessToken, token);
-    //       window.location.reload;
-    //     }
-    //   });
+    dispatch(doLogin(data))
+      .then(unwrapResult)
+      .then((res: IResLogin) => {
+        if (res) {
+          const token = res.access;
+          window.localStorage.setItem(EToken.accessToken, token);
+          window.location.replace("/");
+        }
+      });
   };
   return (
     <div className="register">

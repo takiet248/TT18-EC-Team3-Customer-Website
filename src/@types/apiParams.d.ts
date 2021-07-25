@@ -9,6 +9,6 @@ interface IParamsRegister {
 }
 
 interface IParamsLogin {
-  username: string;
+  email: string;
   password: string;
 }
