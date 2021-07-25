@@ -100,7 +100,7 @@ interface ITutor {
   email?: string;
   phone?: number;
   avatar?: string;
-  address?: string;
+  address: string;
   gender?: number;
   degree?: Array<IResDegree>;
   DOB?: IResDate;
