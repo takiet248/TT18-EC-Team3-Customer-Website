@@ -95,18 +95,26 @@ interface ICourse {
 }
 
 interface ITutor {
-  id: number;
-  name: string;
-  image: string;
-  location: string;
-  teachingSubject: string[];
-  teachingLevel: string[];
-  rating: number;
-  isLike: number;
-  quote: string;
-  workExperience: string;
-  education: string[];
-  courses: ICourse[];
+  _id?: string;
+  name?: string;
+  email?: string;
+  phone?: number;
+  avatar?: string;
+  address?: string;
+  gender?: number;
+  degree?: Array<IResDegree>;
+  DOB?: IResDate;
+  major?: Array<IResMajor>;
+  course?: Array<IResCourse>;
+  accent?: string;
+  quote?: string;
+  education?: Array<IResEducation>;
+  exp?: string;
+  rating?: number;
+  personality?: string;
+  noLike?: number;
+  noOngoingCourse?: number;
+  available?: Array<IResAvailable>;
 }
 
 interface ICourseItem {

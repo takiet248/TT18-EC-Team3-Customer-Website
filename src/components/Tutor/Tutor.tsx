@@ -7,42 +7,25 @@ import { useHistory } from "react-router";
 import { Label } from "../common";
 import "./Tutor.scss";
 
-type Props = {
-  tutor: ITutor;
-};
-
-export const Tutor: React.FC<Props> = ({ tutor }) => {
-  const { name, image, location, teachingSubject, teachingLevel, rating } =
-    tutor;
+export const Tutor: React.FC<ITutor> = ({
+  name,
+  avatar,
+  address,
+  major,
+  rating,
+}) => {
   const history = useHistory();
-  const [, setTest] = useState("");
-  useEffect(() => {
-    setTest(teachingSubject.join());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
   return (
-    <div
-      className="tutor-item"
-      onClick={() => {
-        history.push({
-          pathname: "./tutor-profile",
-          state: {
-            image: image,
-            name: name,
-            location: location,
-            teachingSubject: teachingSubject,
-            teachingLevel: teachingLevel,
-            rating: rating,
-            workExperience: tutor.workExperience,
-            education: tutor.education,
-            quote: tutor.quote,
-            courses: tutor.courses,
-          },
-        });
-      }}
-    >
+    <div className="tutor-item">
       <div className="tutor-item__image">
-        <img src={image} alt=""/>
+        <img
+          src={
+            avatar ||
+            "https://p.bigstockphoto.com/vVu7XprxSayr867oA3KQ_bigstock-Colorful-fruit-pattern-of-fres-282127069.jpg"
+          }
+          alt=""
+        />
       </div>
       <div className="tutor-item__info">
         <div className="tutor-item__header">
@@ -55,14 +38,20 @@ export const Tutor: React.FC<Props> = ({ tutor }) => {
 
         <Label
           icon={<ImLocation2 size={16} />}
-          title={<p className="tutor-item__title">{location} </p>}
+          title={
+            <p className="tutor-item__title">
+              {address?.length < 30
+                ? address
+                : address?.substring(0, 35) + "..."}
+            </p>
+          }
         />
         <Label
           icon={<GiBookCover size={16} />}
           title={
             <span className="tutor-item__title">
-              {teachingSubject.map((item: any, index: number) => {
-                return <span key={index}> {item} .</span>;
+              {major?.map((item: any, index: number) => {
+                return <span key={index}> {item.item} .</span>;
               })}
             </span>
           }
@@ -72,8 +61,8 @@ export const Tutor: React.FC<Props> = ({ tutor }) => {
           icon={<FaGraduationCap size={16} />}
           title={
             <span className="tutor-item__title">
-              {teachingLevel.map((item: any, index: number) => {
-                return <span key={index}> {item} .</span>;
+              {major?.map((item: any, index: number) => {
+                return <span key={index}> {item.item} .</span>;
               })}
             </span>
           }
