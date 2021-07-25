@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from "react";
 import "./SignUp.scss";
 import { Button, Input } from "../../components/common";
 import { useHistory } from "react-router";
 import { useForm } from "react-hook-form";
+import { useAppDispatch } from "../../redux/store";
+import { doRegister } from "../../redux";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { EToken } from "../../constants";
 // import { doRegister } from "../../redux/actions/userActions";
 
 type FormValues = {
@@ -11,31 +15,28 @@ type FormValues = {
   password: string;
   phone: number;
   address: string;
-  gender: boolean;
+  gender: number;
   DOB: string;
 };
+
 export const SignUp = () => {
   const history = useHistory();
+  const dispatch = useAppDispatch();
 
- 
-  const {
-    register,
-    handleSubmit,
-  } = useForm<FormValues>();
+  useEffect(() => {
+    setValue("gender", 1);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const { register, handleSubmit, setValue } = useForm<FormValues>();
   const onSubmit = (data: any) => {
-    console.log(data);
-    // dispatch(
-    //   doRegister(
-    //     getValues("name"),
-    //     getValues("email"),
-    //     getValues("password"),
-    //     getValues("phone"),
-    //     getValues("address"),
-    //     getValues("gender"),
-    //     getValues("DOB")
-    //   )
-    // );
-    
+    dispatch(doRegister(data))
+      .then(unwrapResult)
+      .then((res: IResLogin) => {
+        if (res) {
+          const token = res.access;
+          window.localStorage.setItem(EToken.accessToken, token);
+          window.location.replace("/");
+        }
+      });
   };
 
   return (
@@ -52,10 +53,15 @@ export const SignUp = () => {
           <p>Sign up with your email address</p>
           <Input placeholder="Name" {...register("name")} />
           <Input placeholder="Email" {...register("email")} />
-          <Input placeholder="Password" {...register("password")} />
+          <Input
+            placeholder="Password"
+            {...register("password")}
+            type="password"
+          />
           <Input placeholder="Phone" {...register("phone")} />
           <Input placeholder="Address" {...register("address")} />
-          <Input placeholder="Day of birth" {...register("DOB")} />
+          <Input placeholder="Date of birth" {...register("DOB")} />
+
           <Button width="100%" marginBottom={20} type="submit">
             Sign Up
           </Button>

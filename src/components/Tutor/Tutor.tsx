@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { AiFillStar } from "react-icons/ai";
 import { FaGraduationCap } from "react-icons/fa";
 import { GiBookCover } from "react-icons/gi";
 import { ImLocation2 } from "react-icons/im";
-import { useHistory } from "react-router";
 import { Label } from "../common";
 import "./Tutor.scss";
 
@@ -13,11 +12,10 @@ export const Tutor: React.FC<ITutor> = ({
   address,
   major,
   rating,
+  handleGotoDetail,
 }) => {
-  const history = useHistory();
-
   return (
-    <div className="tutor-item">
+    <div className="tutor-item" onClick={handleGotoDetail}>
       <div className="tutor-item__image">
         <img
           src={
@@ -39,13 +37,11 @@ export const Tutor: React.FC<ITutor> = ({
         <Label
           icon={<ImLocation2 size={16} />}
           title={
-            
             <p className="tutor-item__title">
               {address?.length < 30
                 ? address
                 : address?.substring(0, 30) + "..."}
             </p>
-            
           }
         />
         <Label

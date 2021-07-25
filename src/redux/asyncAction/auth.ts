@@ -8,3 +8,11 @@ export const doLogin = createAsyncThunk(
     return result.data;
   }
 );
+
+export const doRegister = createAsyncThunk(
+  "auth@post/Register",
+  async (params: IParamsRegister) => {
+    const result = await apiAuth.register(params);
+    return result.data;
+  }
+);

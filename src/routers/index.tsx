@@ -24,7 +24,7 @@ export const Routers = () => {
         />
         <PublicRouter
           exact={true}
-          path={"/tutor-profile"}
+          path={"/tutor/:uid"}
           component={TutorProfile}
           layout={OnlyHeaderLayout}
           header={Header}
