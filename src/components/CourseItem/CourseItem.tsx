@@ -1,3 +1,4 @@
+import React from "react";
 import { AiFillStar, AiOutlineBook } from "react-icons/ai";
 import { GiSandsOfTime } from "react-icons/gi";
 import { IoSchoolOutline } from "react-icons/io5";
@@ -14,7 +15,10 @@ export const CourseItem: React.FC<ICourseItem> = ({
   return (
     <div className="course-item" key={id}>
       <div className="course-item__image">
-        <img src="https://hacentre.edu.vn/wp-content/uploads/2020/10/tu-vung-ielts-speaking-chu-de-study-work-19.jpg" alt=""></img>
+        <img
+          src="https://hacentre.edu.vn/wp-content/uploads/2020/10/tu-vung-ielts-speaking-chu-de-study-work-19.jpg"
+          alt=""
+        ></img>
       </div>
       <div className="course-item__info">
         <div className="course-item__header">

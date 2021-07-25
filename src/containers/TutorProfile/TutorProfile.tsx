@@ -44,7 +44,7 @@ export const TutorProfile = () => {
                 <IoLocationOutline size={20} />
                 <a
                   href={`http://maps.google.com/?q=${state.location}`}
-                  target="_blank" rel="noreferrer"
+                  target="_blank" rel="noopener noreferrer"
                 >
                   {state.location}
                 </a>
