@@ -51,16 +51,22 @@ export const SignUp = () => {
         <div className="register__form">
           <h3>Start learning with your favorite tutors in our platform now!</h3>
           <p>Sign up with your email address</p>
-          <Input placeholder="Name" {...register("name")} />
-          <Input placeholder="Email" {...register("email")} />
+          <Input placeholder="Name" {...register("name")} required />
+          <Input
+            placeholder="Email"
+            {...register("email")}
+            required
+            type="email"
+          />
           <Input
             placeholder="Password"
             {...register("password")}
             type="password"
+            required
           />
-          <Input placeholder="Phone" {...register("phone")} />
-          <Input placeholder="Address" {...register("address")} />
-          <Input placeholder="Date of birth" {...register("DOB")} />
+          <Input placeholder="Phone" {...register("phone")} required />
+          <Input placeholder="Address" {...register("address")} required />
+          <Input placeholder="Date of birth" {...register("DOB")} required />
 
           <Button width="100%" marginBottom={20} type="submit">
             Sign Up
