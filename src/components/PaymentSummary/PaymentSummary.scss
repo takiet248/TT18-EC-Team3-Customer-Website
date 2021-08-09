@@ -1,0 +1,52 @@
+.payment-summary {
+  margin-bottom: 100px;
+  h1 {
+    font: {
+      size: 35px;
+      weight: 500;
+    }
+    line-height: 40px;
+  }
+  button {
+    text-transform: uppercase;
+    display: block;
+    font : {
+      size: 18px;
+      weight: 500;
+    }
+    margin: 0 auto;
+    padding: 13px 60px;
+    width: 300px;
+  }
+  .payment-summary__calculation {
+    margin-bottom: 30px;
+    .calculation-priceSession {
+      padding: 10px 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      span {
+        font: {
+          size: 20px;
+          weight: 400;
+        }
+        line-height: 25px;
+      }
+      .bold {
+        font-weight: 700;
+      }
+    }
+    .calculation-totalSessions {
+      @extend .calculation-priceSession;
+      border-bottom: 1px solid #b9b9b9;
+    }
+    .calculation-promo {
+      @extend .calculation-priceSession;
+    }
+    .calculation-fullPrice {
+      @extend .calculation-priceSession;
+    }
+    .calculation-deposit {
+      @extend .calculation-priceSession;
+    }
+  }
+}
