@@ -6,3 +6,4 @@ export * from "./Tutor/Tutor";
 export * from "./CourseItem/CourseItem";
 export * from "./Introduction/Introduction";
 export * from "./Filter/Filter";
+export * from "./PaymentSummary/PaymentSummary";
