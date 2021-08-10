@@ -30,7 +30,7 @@
     label {
       font: {
         size: 18px;
-        weight: 500;
+        weight: 700;
       }
       color: black;
     }
@@ -45,6 +45,16 @@
         size: 18px;
         weight: 500;
       }
+    }
+    button {
+      font : {
+        size: 18px;
+        weight: 500;
+        family: "Quicksand", sans-serif;
+      }
+      margin: 0 auto;
+      padding: 16px 19px;
+      width: 300px;
     }
   }
 }
