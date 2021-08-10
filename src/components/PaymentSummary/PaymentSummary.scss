@@ -1,5 +1,4 @@
 .payment-summary {
-  margin-bottom: 100px;
   h1 {
     font: {
       size: 35px;
@@ -7,21 +6,11 @@
     }
     line-height: 40px;
   }
-  button {
-    text-transform: uppercase;
-    display: block;
-    font : {
-      size: 18px;
-      weight: 500;
-    }
-    margin: 0 auto;
-    padding: 13px 60px;
-    width: 300px;
-  }
+
   .payment-summary__calculation {
     margin-bottom: 30px;
     .calculation-priceSession {
-      padding: 10px 15px 20px;
+      padding: 10px 15px 10px;
       display: flex;
       justify-content: space-between;
       span {

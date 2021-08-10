@@ -4,3 +4,4 @@ export * from "./SignUp/SignUp";
 export * from "./Login/Login";
 export * from "./PaymentInfo/PaymentInfo";
 export * from "./PaymentMethod/PaymentMethod";
+export * from "./OrderInfo/OrderInfo";
