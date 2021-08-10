@@ -9,6 +9,7 @@ import {
   Login,
   PaymentInfo,
   PaymentMethod,
+  OrderInfo,
 } from "../containers";
 import { HeaderFooterLayout, OnlyHeaderLayout } from "../layouts";
 import { PublicRouter } from "./PublicRouter";
@@ -65,6 +66,14 @@ export const Routers = () => {
           exact={true}
           path={"/payment-method"}
           component={PaymentMethod}
+          layout={OnlyHeaderLayout}
+          header={Header}
+          isHasHeader={true}
+        />
+        <PublicRouter
+          exact={true}
+          path={"/order-info"}
+          component={OrderInfo}
           layout={OnlyHeaderLayout}
           header={Header}
           isHasHeader={true}

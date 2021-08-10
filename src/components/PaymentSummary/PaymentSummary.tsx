@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "../common";
 import "./PaymentSummary.scss";
 
 export const PaymentSummary = () => {
@@ -28,7 +27,6 @@ export const PaymentSummary = () => {
           <span className="bold">$11,1</span>
         </div>
       </div>
-      <Button>purchase</Button>
     </div>
   );
 };

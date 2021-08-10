@@ -23,6 +23,9 @@ export const PaymentMethod = () => {
       <div className="paymentMethod__summary">
         <PaymentSummary />
       </div>
+      <div className="purchase-button">
+        <Button>purchase</Button>
+      </div>
     </div>
   );
 };
