@@ -15,7 +15,7 @@ import { ScrollHorizontal } from "../../components/common/ScrollHorizontal/Scrol
 import { useAppDispatch } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
-import { doGetAllListTutor, doGetOneTutor } from "../../redux";
+import { doGetOneTutor } from "../../redux";
 
 export const TutorProfile = () => {
   const dispatch = useAppDispatch();
@@ -26,7 +26,6 @@ export const TutorProfile = () => {
   const oneTutor = useSelector((state: RootState) => state.tutorSlice.tutor);
 
   useEffect(() => {
-    dispatch(doGetAllListTutor());
     dispatch(doGetOneTutor({ uid: uid }));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
