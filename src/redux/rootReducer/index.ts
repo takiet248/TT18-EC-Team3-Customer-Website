@@ -1,3 +1,4 @@
+import  courseSlice  from './../slice/apiSlice/courseSlice';
 import { combineReducers } from "@reduxjs/toolkit";
 
 import modalSlice from "../slice/appSlice/modalSlice";
@@ -8,5 +9,6 @@ export const rootReducer = combineReducers({
   modalSlice,
   auth,
   tutorSlice,
+  courseSlice,
 });
 export type RootState = ReturnType<typeof rootReducer>;

@@ -36,13 +36,7 @@ export const Tutor: React.FC<ITutor> = ({
 
         <Label
           icon={<ImLocation2 size={16} />}
-          title={
-            <p className="tutor-item__title">
-              {address?.length < 30
-                ? address
-                : address?.substring(0, 30) + "..."}
-            </p>
-          }
+          title={<p className="tutor-item__title">{address}</p>}
         />
         <Label
           icon={<GiBookCover size={16} />}

@@ -33,12 +33,13 @@ interface IInput extends IStyle {
   label?: string;
   placeholder?: string;
   value?: string;
-  type?: "text" | "password";
+  type?: "text" | "password" | "email";
   error?: any;
   id?: string;
   isFocus?: boolean;
   valueOnChange?: any;
   onClick?: any;
+  required?: boolean;
   onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
   onBlur?: React.FocusEventHandler<HTMLInputElement> | undefined;
 }
@@ -112,4 +113,5 @@ interface ICourseItem {
   level?: string;
   subject?: string;
   rating?: number;
+  onClick?: any;
 }

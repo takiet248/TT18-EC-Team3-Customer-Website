@@ -15,6 +15,7 @@ export const Input = React.forwardRef<any, IInput>(
       type,
       onChange,
       onBlur,
+      required,
     },
     ref
   ) => {
@@ -30,6 +31,7 @@ export const Input = React.forwardRef<any, IInput>(
           onBlur={onBlur}
           onChange={onChange}
           type={type}
+          required={true}
           ref={ref}
         />
       </div>

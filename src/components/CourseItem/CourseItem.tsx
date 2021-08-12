@@ -11,9 +11,10 @@ export const CourseItem: React.FC<ICourseItem> = ({
   level,
   subject,
   rating,
+  onClick,
 }) => {
   return (
-    <div className="course-item" key={id}>
+    <div className="course-item" key={id} onClick={onClick}>
       <div className="course-item__image">
         <img
           src="https://hacentre.edu.vn/wp-content/uploads/2020/10/tu-vung-ielts-speaking-chu-de-study-work-19.jpg"
@@ -28,19 +29,20 @@ export const CourseItem: React.FC<ICourseItem> = ({
             <AiFillStar size={20} color="#EEA320" />
           </div>
         </div>
-
-        <Label
-          icon={<GiSandsOfTime size={18} />}
-          title={<p className="course-item__title">Duration: {durations}</p>}
-        />
-        <Label
-          icon={<IoSchoolOutline size={16} />}
-          title={<p className="course-item__title">Level: {level}</p>}
-        />
-        <Label
-          icon={<AiOutlineBook size={16} />}
-          title={<p className="course-item__title">Subject: {subject}</p>}
-        />
+        <div className="course-item__label">
+          <Label
+            icon={<GiSandsOfTime size={18} />}
+            title={<p className="course-item__title">Duration: {durations}</p>}
+          />
+          <Label
+            icon={<IoSchoolOutline size={16} />}
+            title={<p className="course-item__title">Level: {level}</p>}
+          />
+          <Label
+            icon={<AiOutlineBook size={16} />}
+            title={<p className="course-item__title">Subject: {subject}</p>}
+          />
+        </div>
       </div>
     </div>
   );

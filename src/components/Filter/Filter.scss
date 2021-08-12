@@ -1,0 +1,26 @@
+.filter-container {
+  display: flex;
+  margin-top: 50px;
+  margin-left: 5%;
+  .filter-item {
+    margin-right: 2rem;
+    select {
+      padding: 8px 5px;
+      outline: none;
+      border: 1px solid #747474;
+      border-radius: 4px;
+      font: {
+        size: 18px;
+        weight: 700;
+        family: "Quicksand", sans-serif;
+      }
+      option {
+        font: {
+          size: 18px;
+          weight: 500;
+          family: "Quicksand", sans-serif;
+        }
+      }
+    }
+  }
+}

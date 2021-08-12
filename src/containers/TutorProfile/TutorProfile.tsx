@@ -16,17 +16,20 @@ import { useAppDispatch } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
 import { doGetOneTutor } from "../../redux";
+import { CourseItem } from "../../components";
+import { useHistory } from "react-router-dom";
 
 export const TutorProfile = () => {
   const dispatch = useAppDispatch();
   const [date, setDate] = useState(new Date());
   const [, setDay] = useState(translateDay(new Date()));
   const { uid } = useParams<{ uid: string }>();
-
+  const history = useHistory();
   const oneTutor = useSelector((state: RootState) => state.tutorSlice.tutor);
 
   useEffect(() => {
     dispatch(doGetOneTutor({ uid: uid }));
+    window.scrollTo({ top: 0, left: 0 });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getDate = (date: Date) => {
@@ -135,18 +138,22 @@ export const TutorProfile = () => {
             marginTop={16}
             paddingBottom={8}
           >
-            {/* {state.courses.map((item: any, index: number) => {
-              return (
-                <CourseItem
-                  key={index}
-                  name={item.name}
-                  durations={item.durations}
-                  rating={item.rating}
-                  subject={item.subject}
-                  level={item.level}
-                />
-              );
-            })} */}
+            {oneTutor.course &&
+              oneTutor.course.map((item: any, index: number) => {
+                return (
+                  <CourseItem
+                    key={index}
+                    name={item.id}
+                    durations={item.durations}
+                    rating={item.rating}
+                    subject={item.subject}
+                    level={item.level}
+                    onClick={() => {
+                      history.push(`/course/${item.id}/${uid}`);
+                    }}
+                  />
+                );
+              })}
           </ScrollHorizontal>
         </div>
 
