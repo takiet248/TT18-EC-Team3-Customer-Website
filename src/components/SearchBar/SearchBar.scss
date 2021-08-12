@@ -5,6 +5,11 @@
   border: 2px solid $primary-color;
   border-radius: 4px;
   position: relative;
+  @include tablet {
+    width: 450px;
+  }
+  @include mobile {
+  }
   input {
     border-radius: 4px;
     border: none;
@@ -25,7 +30,7 @@
       font-size: 13px;
     }
   }
-  &__icon{
+  &__icon {
     position: absolute;
     right: 8px;
     bottom: 20%;

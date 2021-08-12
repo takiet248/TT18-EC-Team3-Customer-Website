@@ -38,8 +38,13 @@ export const Login = () => {
         <div className="register__form">
           <h3>Welcome back to Amitu!</h3>
           <p>Login with your email address</p>
-          <Input placeholder="Email" {...register("email")} />
-          <Input placeholder="Password" {...register("password")} type="password" />
+          <Input placeholder="Email" {...register("email")} required />
+          <Input
+            placeholder="Password"
+            {...register("password")}
+            type="password"
+            required
+          />
 
           <Button width="100%" marginBottom={20} type="submit">
             Login

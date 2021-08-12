@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./Homepage.scss";
-import { Banner, Introduction, Tutor } from "../../components";
+import { Banner, Introduction, Tutor, Filter } from "../../components";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
 import { useAppDispatch } from "../../redux/store";
@@ -22,6 +22,7 @@ export const Homepage: React.FC = () => {
   return (
     <div className="home">
       <Banner />
+      <Filter />
       <div className="home__list-grid">
         {listAllTutor.map((item, index) => (
           <Tutor
