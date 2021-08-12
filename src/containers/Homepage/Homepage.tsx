@@ -4,7 +4,7 @@ import { Banner, Introduction, Tutor, Filter } from "../../components";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
 import { useAppDispatch } from "../../redux/store";
-import { doGetAllListTutor, doGetOneTutor } from "../../redux";
+import { doGetAllListTutor } from "../../redux";
 import { useHistory } from "react-router";
 
 export const Homepage: React.FC = () => {
@@ -16,7 +16,6 @@ export const Homepage: React.FC = () => {
 
   useEffect(() => {
     dispatch(doGetAllListTutor());
-    dispatch(doGetOneTutor({ uid: "60fd8d91f02ec300223e45b6" }));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (

@@ -113,4 +113,5 @@ interface ICourseItem {
   level?: string;
   subject?: string;
   rating?: number;
+  onClick?: any;
 }

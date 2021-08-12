@@ -17,13 +17,14 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
 import { doGetOneTutor } from "../../redux";
 import { CourseItem } from "../../components";
+import { useHistory } from "react-router-dom";
 
 export const TutorProfile = () => {
   const dispatch = useAppDispatch();
   const [date, setDate] = useState(new Date());
   const [, setDay] = useState(translateDay(new Date()));
   const { uid } = useParams<{ uid: string }>();
-
+  const history = useHistory();
   const oneTutor = useSelector((state: RootState) => state.tutorSlice.tutor);
 
   useEffect(() => {
@@ -147,6 +148,9 @@ export const TutorProfile = () => {
                     rating={item.rating}
                     subject={item.subject}
                     level={item.level}
+                    onClick={() => {
+                      history.push(`/course/${item.id}/${uid}`);
+                    }}
                   />
                 );
               })}
