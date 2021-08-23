@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Button, Calendar, Label } from "../../components/common";
+import { Avatar, Calendar, Label } from "../../components/common";
 import "./TutorProfile.scss";
 import { IoLocationOutline, IoBriefcaseSharp } from "react-icons/io5";
 import {
@@ -64,9 +64,9 @@ export const TutorProfile = () => {
               </span>
             </div>
           </div>
-          <Button width={180} marginLeft={16}>
+          {/* <Button width={180} marginLeft={16}>
             BOOK
-          </Button>
+          </Button> */}
         </div>
         <iframe
           width="100%"

@@ -3,9 +3,9 @@ import "./CourseProfile.scss";
 
 import { useAppDispatch } from "../../redux/store";
 import { CourseItem } from "../../components";
-import { Avatar } from "../../components/common";
+import { Avatar, Button } from "../../components/common";
 import { FaMoneyBillWave } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
 import { doGetOneCourse } from "../../redux/asyncAction/course";
@@ -14,7 +14,7 @@ import { doGetOneTutor } from "../../redux";
 export const CourseProfile = () => {
   const dispatch = useAppDispatch();
   const { courseid, uid } = useParams<{ courseid: string; uid: string }>();
-
+  const history = useHistory();
   const oneTutor = useSelector((state: RootState) => state.tutorSlice.tutor);
   const oneCourse = useSelector(
     (state: RootState) => state.courseSlice.oneCourse
@@ -33,6 +33,25 @@ export const CourseProfile = () => {
             <CourseItem name={oneCourse?.name} rating={oneCourse?.rating} />
           </div>
           <div className="course__right">
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: 16,
+                width: "100%",
+              }}
+            >
+              <Button
+                width={180}
+                marginLeft={16}
+                onClick={() => {
+                  history.push("/payment-method");
+                }}
+              >
+                BOOK
+              </Button>
+            </div>
+
             <p style={{ fontSize: 24, fontWeight: "bold", marginBottom: 16 }}>
               Overview
             </p>

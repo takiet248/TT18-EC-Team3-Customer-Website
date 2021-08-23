@@ -55,7 +55,7 @@ export const PaymentMethod = () => {
       <div className="purchase-button">
         {/* <Button>purchase</Button> */}
         <PayPalButton
-          amount={20}
+          amount={30}
           onSuccess={successPaymentHandler}
         ></PayPalButton>
       </div>
