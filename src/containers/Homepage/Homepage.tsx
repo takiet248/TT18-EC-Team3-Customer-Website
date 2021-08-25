@@ -31,6 +31,7 @@ export const Homepage: React.FC = () => {
             rating={item.rating}
             avatar={item.avatar}
             major={item.major}
+            education={item.education}
             handleGotoDetail={() => {
               history.push(`/tutor/${item._id}`);
             }}

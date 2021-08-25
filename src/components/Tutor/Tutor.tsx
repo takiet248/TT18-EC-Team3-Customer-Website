@@ -12,6 +12,7 @@ export const Tutor: React.FC<ITutor> = ({
   address,
   major,
   rating,
+  education,
   handleGotoDetail,
 }) => {
   return (
@@ -48,14 +49,14 @@ export const Tutor: React.FC<ITutor> = ({
             </span>
           }
         />
-
         <Label
           icon={<FaGraduationCap size={16} />}
           title={
             <span className="tutor-item__title">
-              {major?.map((item: any, index: number) => {
+              {education?.map((item: any, index: number) => {
                 return <span key={index}> {item.item} .</span>;
               })}
+            
             </span>
           }
         />
