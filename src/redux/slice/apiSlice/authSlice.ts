@@ -1,4 +1,4 @@
-import { doRegister } from "./../../asyncAction/auth";
+import { doGetUserInfo, doRegister } from "./../../asyncAction/auth";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { doLogin } from "../../asyncAction";
 
@@ -17,6 +17,7 @@ export const authSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
+    //login
     builder.addCase(doLogin.pending, (state) => {
       state.isLoading = true;
     });
@@ -30,6 +31,7 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.err = action.error;
     });
+    //register
     builder.addCase(doRegister.pending, (state) => {
       state.isLoading = true;
     });
@@ -40,6 +42,20 @@ export const authSlice = createSlice({
       }
     );
     builder.addCase(doRegister.rejected, (state, action) => {
+      state.isLoading = false;
+      state.err = action.error;
+    });
+    //getinfo
+    builder.addCase(doGetUserInfo.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(
+      doGetUserInfo.fulfilled,
+      (state, action: PayloadAction<IResLogin>) => {
+        state.isLoading = false;
+      }
+    );
+    builder.addCase(doGetUserInfo.rejected, (state, action) => {
       state.isLoading = false;
       state.err = action.error;
     });

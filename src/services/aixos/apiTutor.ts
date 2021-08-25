@@ -12,4 +12,8 @@ export const apiTutor = {
     const url = baseURL + "get-one";
     return axiosCommon.get(url + objToQuery(params));
   },
+  getTutorCourse: (params: { uid: string }) => {
+    const url = baseURL + "course/get-all";
+    return axiosCommon.get(url + objToQuery(params));
+  },
 };

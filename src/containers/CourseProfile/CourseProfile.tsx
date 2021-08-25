@@ -3,25 +3,34 @@ import "./CourseProfile.scss";
 
 import { useAppDispatch } from "../../redux/store";
 import { CourseItem } from "../../components";
-import { Avatar } from "../../components/common";
-import { FaMoneyBillWave } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { Avatar, HeartIcon, Label } from "../../components/common";
+import { useLocation, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
 import { doGetOneCourse } from "../../redux/asyncAction/course";
 import { doGetOneTutor } from "../../redux";
+import { IoSchoolOutline } from "react-icons/io5";
+import { GiSandsOfTime } from "react-icons/gi";
+import {
+  AiOutlineBook,
+  AiOutlineShoppingCart,
+  AiOutlineStar,
+} from "react-icons/ai";
+import { RiMoneyDollarBoxLine } from "react-icons/ri";
 
 export const CourseProfile = () => {
   const dispatch = useAppDispatch();
-  const { courseid, uid } = useParams<{ courseid: string; uid: string }>();
-
+  const { courseid } = useParams<{ courseid: string }>();
+  const { state } = useLocation<any>();
   const oneTutor = useSelector((state: RootState) => state.tutorSlice.tutor);
   const oneCourse = useSelector(
     (state: RootState) => state.courseSlice.oneCourse
   );
   useEffect(() => {
     dispatch(doGetOneCourse({ uid: courseid }));
-    dispatch(doGetOneTutor({ uid: uid }));
+    dispatch(doGetOneTutor({ uid: state?.tutorid }));
+    console.log(courseid);
+
     window.scrollTo({ top: 0, left: 0 });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -30,18 +39,15 @@ export const CourseProfile = () => {
       <div className="course">
         <div className="course__intro">
           <div className="course__left">
-            <CourseItem name={oneCourse?.name} rating={oneCourse?.rating} />
+            <CourseItem
+              avatar={oneCourse?.avatar}
+              name={oneCourse?.name}
+              rating={oneCourse?.rating}
+              decription={oneCourse?.overview}
+            />
           </div>
           <div className="course__right">
-            <p style={{ fontSize: 24, fontWeight: "bold", marginBottom: 16 }}>
-              Overview
-            </p>
-            <p style={{ marginBottom: 16 }}>
-              It can be intimidating to speak with a foreigner, no matter how
-              much grammar and vocabulary you've mastered. If you have basic
-              knowledge of English but have not spent much time speaking, this
-              course will help you ease into your first English conversations.
-            </p>
+            <p style={{ marginBottom: 16 }}></p>
             <p style={{ fontSize: 24, fontWeight: "bold", marginBottom: 8 }}>
               Tutor
             </p>
@@ -61,33 +67,66 @@ export const CourseProfile = () => {
               </div>
             </div>
 
-            <p
-              style={{
-                fontSize: 20,
-                fontWeight: "bold",
-                marginBottom: 8,
-                marginTop: 16,
-              }}
-            >
-              Duration
-            </p>
-            <p style={{ marginBottom: 16, fontSize: 16 }}>
-              {oneCourse.duration}
-            </p>
-            <p
-              style={{
-                fontSize: 20,
-                fontWeight: "bold",
-                marginBottom: 8,
-                marginTop: 16,
-              }}
-            >
-              Cost
-            </p>
-            <span style={{ marginBottom: 16, fontSize: 16 }}>
-              30 <FaMoneyBillWave />
-            </span>
+            <Label
+              icon={<RiMoneyDollarBoxLine size={20} />}
+              title={`Price: ${oneCourse.price}`}
+              marginBottom={16}
+              marginTop={16}
+            />
+            <Label
+              icon={<GiSandsOfTime size={20} />}
+              title={`Duration: ${oneCourse.duration}`}
+              marginBottom={16}
+              marginTop={16}
+            />
+            <Label
+              icon={<IoSchoolOutline size={20} />}
+              title={`Level: ${oneCourse.level}`}
+              marginBottom={16}
+              marginTop={16}
+            />
+            <Label
+              icon={<AiOutlineBook size={20} />}
+              title={
+                <div>
+                  {oneCourse.subject?.map((item: any, index: number) => {
+                    return (
+                      <span className="course__subject" key={index}>
+                        Subject: {item.item} .
+                      </span>
+                    );
+                  })}
+                </div>
+              }
+              marginBottom={16}
+              marginTop={16}
+            />
           </div>
+        </div>
+        {/* select */}
+        <div className="tutor__selection">
+          <div className="tutor__selection-item">
+            <AiOutlineShoppingCart size={20} />
+            <p>BOOK</p>
+          </div>
+          <div className="tutor__selection-item">
+            <HeartIcon isLiked={oneTutor.noLike} />
+            <p>Like</p>
+          </div>
+          <div className="tutor__selection-item">
+            <AiOutlineStar size={20} />
+            <p>Vote</p>
+          </div>
+        </div>
+        {/* syllabus */}
+        <div>
+          {oneCourse.syllabus?.map((item: any, index: any) => {
+            return (
+              <div className="course__syllabus-item" key={index}>
+                <p>{item.item}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

@@ -81,7 +81,7 @@ export const Routers = () => {
         />
         <PublicRouter
           exact={true}
-          path={"/course/:courseid/:uid"}
+          path={"/course/:courseid"}
           component={CourseProfile}
           layout={OnlyHeaderLayout}
           header={Header}

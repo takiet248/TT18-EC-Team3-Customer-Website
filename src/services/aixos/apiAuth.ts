@@ -10,4 +10,8 @@ export const apiAuth = {
     const url = baseURL + "register";
     return axiosAuth.post(url, params);
   },
+  userInfo: () => {
+    const url = baseURL + "user-me";
+    return axiosAuth.get(url);
+  },
 };
