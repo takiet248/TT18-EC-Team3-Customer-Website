@@ -55,7 +55,7 @@ export const Header = () => {
             logout();
           }}
         >
-          Log Out
+          LOG OUT
         </Button>
       )}
       <div
@@ -82,6 +82,14 @@ export const Header = () => {
           Sign Up
         </p>
         <p>Notifications</p>
+        <p
+          onClick={() => {
+            logout();
+            handleCloseNavSide();
+          }}
+        >
+          Log out
+        </p>
       </div>
       <span className="header__navlist" onClick={handleOpenNavSide}>
         &#9776;
