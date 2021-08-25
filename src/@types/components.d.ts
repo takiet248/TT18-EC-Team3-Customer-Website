@@ -103,6 +103,7 @@ interface ITutor {
   major?: Array<IResMajor>;
   course?: Array<IResCourse>;
   rating?: number;
+  education?: Array<{ item: string }>;
   handleGotoDetail?: React.MouseEventHandler<HTMLDivElement>;
 }
 

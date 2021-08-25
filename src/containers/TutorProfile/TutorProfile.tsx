@@ -3,12 +3,19 @@ import { Avatar, Button, Calendar, Label } from "../../components/common";
 import "./TutorProfile.scss";
 import { IoLocationOutline, IoBriefcaseSharp } from "react-icons/io5";
 import {
+  AiFillSafetyCertificate,
   AiFillStar,
   AiOutlineCalendar,
   AiOutlineHeart,
+  AiOutlineStar,
   AiOutlineWarning,
 } from "react-icons/ai";
-import { FaGraduationCap, FaChalkboardTeacher } from "react-icons/fa";
+import {
+  FaGraduationCap,
+  FaChalkboardTeacher,
+  FaUserTie,
+} from "react-icons/fa";
+import { MdRecordVoiceOver } from "react-icons/md";
 import { translateDay } from "../../helpers";
 import { useParams } from "react-router";
 import { ScrollHorizontal } from "../../components/common/ScrollHorizontal/ScrollHorizontal";
@@ -68,7 +75,7 @@ export const TutorProfile = () => {
             BOOK
           </Button>
         </div>
-        <iframe
+        {/* <iframe
           width="100%"
           height="400"
           src="https://www.youtube.com/embed/3YLg9VuCTlU"
@@ -86,7 +93,7 @@ export const TutorProfile = () => {
           }}
         >
           {oneTutor.name}
-        </p>
+        </p> */}
         <p>{oneTutor.quote}</p>
         <div className="tutor__selection">
           <div className="tutor__selection-item">
@@ -98,28 +105,38 @@ export const TutorProfile = () => {
             <p>Like</p>
           </div>
           <div className="tutor__selection-item">
-            <AiOutlineWarning size={20} />
-            <p>Report</p>
+            <AiOutlineStar size={20} />
+            <p>Vote</p>
           </div>
         </div>
+        <Label icon={<FaUserTie size={22} />} title={"Personality"} />
+        <div className="tutor__description">{oneTutor.personality}</div>
         <Label icon={<FaGraduationCap size={22} />} title={"Education"} />
         <div className="tutor__description">
-          {oneTutor?.degree?.map((item: any, index: number) => {
+          {oneTutor?.education?.map((item: any, index: number) => {
             return <div key={index}>{item.item}</div>;
           })}
         </div>
-
+        <Label icon={<MdRecordVoiceOver size={22} />} title={"Accent"} />
+        <p className="tutor__description">{oneTutor.accent}</p>
         <Label
           icon={<IoBriefcaseSharp size={20} />}
           title={"Work Experience"}
         />
         <p className="tutor__description">{oneTutor.exp}</p>
-        <Label
-          icon={<FaChalkboardTeacher size={20} />}
-          title={"Teaching level"}
-        />
+        <Label icon={<FaChalkboardTeacher size={20} />} title={"Major"} />
         <div className="tutor__teaching-level">
           {oneTutor.major?.map((item: any, index: number) => {
+            return (
+              <div className="tutor__level-item" key={index}>
+                {item.item}
+              </div>
+            );
+          })}
+        </div>
+        <Label icon={<AiFillSafetyCertificate size={20} />} title={"Degree"} />
+        <div className="tutor__teaching-level">
+          {oneTutor.degree?.map((item: any, index: number) => {
             return (
               <div className="tutor__level-item" key={index}>
                 {item.item}
