@@ -3,7 +3,7 @@ import { AiFillStar } from "react-icons/ai";
 import { FaGraduationCap } from "react-icons/fa";
 import { GiBookCover } from "react-icons/gi";
 import { ImLocation2 } from "react-icons/im";
-import { Label } from "../common";
+import { HeartIcon, Label } from "../common";
 import "./Tutor.scss";
 
 export const Tutor: React.FC<ITutor> = ({
@@ -13,6 +13,7 @@ export const Tutor: React.FC<ITutor> = ({
   major,
   rating,
   education,
+  isLiked,
   handleGotoDetail,
 }) => {
   return (
@@ -25,7 +26,11 @@ export const Tutor: React.FC<ITutor> = ({
           }
           alt=""
         />
+        <div className="tutor-item__action">
+          <HeartIcon isLiked={isLiked} />
+        </div>
       </div>
+
       <div className="tutor-item__info">
         <div className="tutor-item__header">
           <p className="tutor-item__name">{name}</p>
@@ -56,7 +61,6 @@ export const Tutor: React.FC<ITutor> = ({
               {education?.map((item: any, index: number) => {
                 return <span key={index}> {item.item} .</span>;
               })}
-            
             </span>
           }
         />

@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Button, Calendar, Label } from "../../components/common";
+import {
+  Avatar,
+  Button,
+  Calendar,
+  HeartIcon,
+  Label,
+} from "../../components/common";
 import "./TutorProfile.scss";
 import { IoLocationOutline, IoBriefcaseSharp } from "react-icons/io5";
 import {
   AiFillSafetyCertificate,
   AiFillStar,
   AiOutlineCalendar,
-  AiOutlineHeart,
   AiOutlineStar,
-  AiOutlineWarning,
 } from "react-icons/ai";
 import {
   FaGraduationCap,
@@ -101,7 +105,7 @@ export const TutorProfile = () => {
             <p>Schedule</p>
           </div>
           <div className="tutor__selection-item">
-            <AiOutlineHeart size={20} />
+            <HeartIcon isLiked={oneTutor.noLike} />
             <p>Like</p>
           </div>
           <div className="tutor__selection-item">

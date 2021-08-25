@@ -32,6 +32,7 @@ export const Homepage: React.FC = () => {
             avatar={item.avatar}
             major={item.major}
             education={item.education}
+            isLiked={item.noLike}
             handleGotoDetail={() => {
               history.push(`/tutor/${item._id}`);
             }}

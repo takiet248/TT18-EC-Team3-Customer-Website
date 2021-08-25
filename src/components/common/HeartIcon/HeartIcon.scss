@@ -1,0 +1,14 @@
+@import "../../../assets/scss/variable.scss";
+
+.header-icon {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 2px solid $primary-color;
+  background-color: white;
+  cursor: pointer;
+  color: $primary-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
