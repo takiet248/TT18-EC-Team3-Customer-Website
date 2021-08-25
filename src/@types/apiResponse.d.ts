@@ -27,6 +27,7 @@ interface IResTutor {
   noLike?: number;
   noOngoingCourse?: number;
   available?: Array<IResAvailable>;
+  level?: string;
 }
 interface IResDegree {
   item: string;
@@ -62,7 +63,7 @@ interface IResOneTutor {
   address?: string;
   gender?: number;
   degree?: Array<IResDegree>;
-  DOB?: IResDate;
+  DOB?: string;
   major?: Array<IResMajor>;
   course?: Array<IResCourse>;
   accent?: string;
@@ -74,6 +75,7 @@ interface IResOneTutor {
   noLike?: number;
   noOngoingCourse?: number;
   available?: Array<IResAvailable>;
+  level?: string;
 }
 interface IResGetOneTutor {
   tutor: IResOneTutor;
@@ -83,10 +85,14 @@ interface IResGetCourse {
   _id?: string;
   name?: string;
   duration?: string;
-  subject?: any;
-  syllabus?: any;
+  subject?: Array<{ item: string }>;
+  syllabus?: Array<{ item: string }>;
   noLike?: number;
   rating?: number;
+  overview?: string;
+  level?: string;
+  avatar?: string;
+  price?: number;
 }
 interface IResGetOneCourse {
   course: IResGetCourse;

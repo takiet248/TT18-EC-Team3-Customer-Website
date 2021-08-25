@@ -13,6 +13,7 @@ import {
   CourseProfile,
 } from "../containers";
 import { HeaderFooterLayout, OnlyHeaderLayout } from "../layouts";
+import { PrivateRouter } from "./PrivateRouter";
 import { PublicRouter } from "./PublicRouter";
 
 // import { PrivateRouter } from './PrivateRouter';
@@ -55,7 +56,7 @@ export const Routers = () => {
           header={Header}
           isHasHeader={true}
         />
-        <PublicRouter
+        <PrivateRouter
           exact={true}
           path={"/payment-info"}
           component={PaymentInfo}
@@ -63,7 +64,7 @@ export const Routers = () => {
           header={Header}
           isHasHeader={true}
         />
-        <PublicRouter
+        <PrivateRouter
           exact={true}
           path={"/payment-method"}
           component={PaymentMethod}
@@ -71,7 +72,7 @@ export const Routers = () => {
           header={Header}
           isHasHeader={true}
         />
-        <PublicRouter
+        <PrivateRouter
           exact={true}
           path={"/order-info"}
           component={OrderInfo}
@@ -81,7 +82,7 @@ export const Routers = () => {
         />
         <PublicRouter
           exact={true}
-          path={"/course/:courseid/:uid"}
+          path={"/course/:courseid"}
           component={CourseProfile}
           layout={OnlyHeaderLayout}
           header={Header}

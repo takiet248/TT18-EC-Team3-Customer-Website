@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Calendar, Label } from "../../components/common";
+import { Avatar, Calendar, HeartIcon, Label } from "../../components/common";
 import "./TutorProfile.scss";
 import { IoLocationOutline, IoBriefcaseSharp } from "react-icons/io5";
 import {
+  AiFillSafetyCertificate,
   AiFillStar,
   AiOutlineCalendar,
-  AiOutlineHeart,
-  AiOutlineWarning,
+  AiOutlineStar,
 } from "react-icons/ai";
-import { FaGraduationCap, FaChalkboardTeacher } from "react-icons/fa";
+import {
+  FaGraduationCap,
+  FaChalkboardTeacher,
+  FaUserTie,
+} from "react-icons/fa";
+import { MdRecordVoiceOver } from "react-icons/md";
 import { translateDay } from "../../helpers";
 import { useParams } from "react-router";
 import { ScrollHorizontal } from "../../components/common/ScrollHorizontal/ScrollHorizontal";
 import { useAppDispatch } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
-import { doGetOneTutor } from "../../redux";
+import { doGetOneTutor, doGetTutorCourse } from "../../redux";
 import { CourseItem } from "../../components";
 import { useHistory } from "react-router-dom";
 
@@ -26,9 +31,13 @@ export const TutorProfile = () => {
   const { uid } = useParams<{ uid: string }>();
   const history = useHistory();
   const oneTutor = useSelector((state: RootState) => state.tutorSlice.tutor);
+  const tutorCourse = useSelector(
+    (state: RootState) => state.tutorSlice.tutorCourse
+  );
 
   useEffect(() => {
     dispatch(doGetOneTutor({ uid: uid }));
+    dispatch(doGetTutorCourse({ uid: uid }));
     window.scrollTo({ top: 0, left: 0 });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -68,25 +77,6 @@ export const TutorProfile = () => {
             BOOK
           </Button> */}
         </div>
-        <iframe
-          width="100%"
-          height="400"
-          src="https://www.youtube.com/embed/3YLg9VuCTlU"
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
-        <p
-          style={{
-            fontWeight: "bold",
-            fontSize: 24,
-            marginBottom: 8,
-            marginTop: 16,
-          }}
-        >
-          {oneTutor.name}
-        </p>
         <p>{oneTutor.quote}</p>
         <div className="tutor__selection">
           <div className="tutor__selection-item">
@@ -94,32 +84,42 @@ export const TutorProfile = () => {
             <p>Schedule</p>
           </div>
           <div className="tutor__selection-item">
-            <AiOutlineHeart size={20} />
+            <HeartIcon isLiked={oneTutor.noLike} />
             <p>Like</p>
           </div>
           <div className="tutor__selection-item">
-            <AiOutlineWarning size={20} />
-            <p>Report</p>
+            <AiOutlineStar size={20} />
+            <p>Vote</p>
           </div>
         </div>
+        <Label icon={<FaUserTie size={22} />} title={"Personality"} />
+        <div className="tutor__description">{oneTutor.personality}</div>
         <Label icon={<FaGraduationCap size={22} />} title={"Education"} />
         <div className="tutor__description">
-          {oneTutor?.degree?.map((item: any, index: number) => {
+          {oneTutor?.education?.map((item: any, index: number) => {
             return <div key={index}>{item.item}</div>;
           })}
         </div>
-
+        <Label icon={<MdRecordVoiceOver size={22} />} title={"Accent"} />
+        <p className="tutor__description">{oneTutor.accent}</p>
         <Label
           icon={<IoBriefcaseSharp size={20} />}
           title={"Work Experience"}
         />
         <p className="tutor__description">{oneTutor.exp}</p>
-        <Label
-          icon={<FaChalkboardTeacher size={20} />}
-          title={"Teaching level"}
-        />
+        <Label icon={<FaChalkboardTeacher size={20} />} title={"Major"} />
         <div className="tutor__teaching-level">
           {oneTutor.major?.map((item: any, index: number) => {
+            return (
+              <div className="tutor__level-item" key={index}>
+                {item.item}
+              </div>
+            );
+          })}
+        </div>
+        <Label icon={<AiFillSafetyCertificate size={20} />} title={"Degree"} />
+        <div className="tutor__teaching-level">
+          {oneTutor.degree?.map((item: any, index: number) => {
             return (
               <div className="tutor__level-item" key={index}>
                 {item.item}
@@ -138,18 +138,23 @@ export const TutorProfile = () => {
             marginTop={16}
             paddingBottom={8}
           >
-            {oneTutor.course &&
-              oneTutor.course.map((item: any, index: number) => {
+            {tutorCourse &&
+              tutorCourse.map((item: any, index: number) => {
                 return (
                   <CourseItem
                     key={index}
-                    name={item.id}
-                    durations={item.durations}
+                    name={item.name}
+                    avatar={item.avatar}
+                    durations={item.duration}
                     rating={item.rating}
                     subject={item.subject}
                     level={item.level}
+                    price={item.price}
                     onClick={() => {
-                      history.push(`/course/${item.id}/${uid}`);
+                      history.push({
+                        pathname: `/course/${item._id}`,
+                        state: { tutorid: uid },
+                      });
                     }}
                   />
                 );

@@ -13,3 +13,7 @@ export enum EToken {
   accessToken = "localStorage@access",
   sessionToken = "localStorage@session",
 }
+
+export enum EUser {
+  userid = "localStorage@userid",
+}
