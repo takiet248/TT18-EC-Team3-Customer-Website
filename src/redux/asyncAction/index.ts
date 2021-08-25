@@ -1,3 +1,4 @@
 export * from "./auth";
-export * from './tutor';
-export * from './course';
+export * from "./tutor";
+export * from "./course";
+export * from "./payment";

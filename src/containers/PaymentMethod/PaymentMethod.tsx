@@ -2,10 +2,15 @@ import React from "react";
 import "./PaymentMethod.scss";
 import { Button, Input } from "../../components/common";
 import { PayPalButton } from "react-paypal-button-v2";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import { useAppDispatch } from "../../redux/store";
+import { doPaySuccess } from "../../redux";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 export const PaymentMethod = () => {
   const { state } = useLocation<any>();
+  const dispatch = useAppDispatch();
+  const history = useHistory();
   // const [sdkReady, setSdkReady] = useState(false);
   // const data = process.env.REACT_APP_PAYPAL_CLIENT_ID;
   // useEffect(() => {
@@ -31,8 +36,22 @@ export const PaymentMethod = () => {
   //   //   }
   //   // }
   // }, [sdkReady]);
-  const successPaymentHandler = () => {
-    console.log("hihi");
+  const successPaymentHandler = (data: any) => {
+    console.log(data.payer.email_address);
+    dispatch(
+      doPaySuccess({
+        uid: state?.tutorid,
+        cid: state?.courseid,
+        total: state?.price,
+        email: data.payer.email_address,
+      })
+    )
+      .then(unwrapResult)
+      .then((res: any) => {
+        if (res) {
+          history.replace("/");
+        }
+      });
   };
   return (
     <div className="paymentMethod-container">
