@@ -46,24 +46,29 @@ export const CourseProfile = () => {
           </div>
           <div className="course__right">
             <p style={{ marginBottom: 16 }}></p>
-            <p style={{ fontSize: 24, fontWeight: "bold", marginBottom: 8 }}>
-              Tutor
-            </p>
-            <div className="course__info">
-              <Avatar
-                image={
-                  oneTutor.avatar ||
-                  "https://images.unsplash.com/photo-1606498236504-030a628c0047?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZWRpdHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
-                }
-                height={60}
-                width={60}
-              />
-              <div className="course__first">
-                <div className="course__name">
-                  <p>{oneTutor.name}</p>
+
+            {state?.tutorid && (
+              <div className="course__info">
+                <p
+                  style={{ fontSize: 24, fontWeight: "bold", marginBottom: 8 }}
+                >
+                  Tutor
+                </p>
+                <Avatar
+                  image={
+                    oneTutor.avatar ||
+                    "https://images.unsplash.com/photo-1606498236504-030a628c0047?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZWRpdHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
+                  }
+                  height={60}
+                  width={60}
+                />
+                <div className="course__first">
+                  <div className="course__name">
+                    <p>{oneTutor.name}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
 
             <Label
               icon={<RiMoneyDollarBoxLine size={20} />}
@@ -117,10 +122,12 @@ export const CourseProfile = () => {
           </div>
         </div>
         {/* syllabus */}
-        <div>
+        <div className="course__syllabus">
+          <Label title="Syllabus" marginBottom={16} />
           {oneCourse.syllabus?.map((item: any, index: any) => {
             return (
               <div className="course__syllabus-item" key={index}>
+                {index + 1}
                 <p>{item.item}</p>
               </div>
             );

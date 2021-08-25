@@ -16,4 +16,28 @@
       grid-template-columns: 1fr;
     }
   }
+  &__recommendation{
+    padding: 0 5rem;
+    .tutor-item{
+      cursor: pointer;
+      // min-height: 280px;
+      border-radius: 10px;
+      border: 1px solid #00000033;
+      // max-height: 340px;
+      min-width: 240px;
+      max-width: 400px;
+      margin-right: 8px;
+      min-height: 280px;
+      max-height: 280px;
+      width: 100%;
+    }
+    @include tablet{
+      padding: 0 3rem;
+
+    }
+    @include mobile{
+      padding: 0 1rem;
+
+    }
+  }
 }

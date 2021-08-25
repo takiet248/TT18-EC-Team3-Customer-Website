@@ -86,4 +86,21 @@
   &__subject {
     font-size: 18px;
   }
+  &__syllabus-item {
+    display: grid;
+    grid-template-columns: 50px 4fr;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    word-break: keep-all;
+    margin-bottom: 1rem;
+    p {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 18px;
+    }
+  }
+  &__syllabus {
+    padding: 0 3rem;
+  }
 }

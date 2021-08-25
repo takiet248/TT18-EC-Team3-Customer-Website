@@ -20,7 +20,7 @@ import { ScrollHorizontal } from "../../components/common/ScrollHorizontal/Scrol
 import { useAppDispatch } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
-import { doGetOneTutor, doGetRecommendedTutor, doGetTutorCourse } from "../../redux";
+import { doGetOneTutor, doGetTutorCourse } from "../../redux";
 import { CourseItem } from "../../components";
 import { useHistory } from "react-router-dom";
 
@@ -38,7 +38,6 @@ export const TutorProfile = () => {
   useEffect(() => {
     dispatch(doGetOneTutor({ uid: uid }));
     dispatch(doGetTutorCourse({ uid: uid }));
-    dispatch(doGetRecommendedTutor({uid:'60fa93b4a0e2480022504f57'}))
     window.scrollTo({ top: 0, left: 0 });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -145,6 +144,7 @@ export const TutorProfile = () => {
                   <CourseItem
                     key={index}
                     name={item.name}
+                    avatar={item.avatar}
                     durations={item.duration}
                     rating={item.rating}
                     subject={item.subject}
