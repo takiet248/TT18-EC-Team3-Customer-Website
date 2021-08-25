@@ -119,11 +119,13 @@ export const CourseProfile = () => {
           </div>
         </div>
         {/* syllabus */}
-        <div>
+        <Label title={"Syllabus"} marginBottom={16} />
+        <div className="course__syllabus">
           {oneCourse.syllabus?.map((item: any, index: any) => {
             return (
               <div className="course__syllabus-item" key={index}>
-                <p>{item.item}</p>
+                {index + 1}
+                <span>{item.item}</span>
               </div>
             );
           })}
