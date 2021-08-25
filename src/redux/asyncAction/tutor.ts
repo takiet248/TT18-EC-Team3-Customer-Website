@@ -13,3 +13,11 @@ export const doGetOneTutor = createAsyncThunk(
     return result.data;
   }
 );
+
+export const doGetTutorCourse = createAsyncThunk(
+  "tutor@getTutorCourse",
+  async (params: { uid: string }) => {
+    const result = await apiTutor.getTutorCourse(params);
+    return result.data;
+  }
+);

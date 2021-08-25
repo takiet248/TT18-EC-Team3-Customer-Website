@@ -16,3 +16,8 @@ export const doRegister = createAsyncThunk(
     return result.data;
   }
 );
+
+export const doGetUserInfo = createAsyncThunk("auth@post/GetInfo", async () => {
+  const result = await apiAuth.userInfo();
+  return result.data;
+});

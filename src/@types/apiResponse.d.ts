@@ -85,7 +85,7 @@ interface IResGetCourse {
   _id?: string;
   name?: string;
   duration?: string;
-  subject?: any;
+  subject?: Array<{ item: string }>;
   syllabus?: any;
   noLike?: number;
   rating?: number;

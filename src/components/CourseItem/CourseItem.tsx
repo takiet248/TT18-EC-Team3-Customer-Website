@@ -2,6 +2,7 @@ import React from "react";
 import { AiFillStar, AiOutlineBook } from "react-icons/ai";
 import { GiSandsOfTime } from "react-icons/gi";
 import { IoSchoolOutline } from "react-icons/io5";
+import { RiMoneyDollarBoxLine } from "react-icons/ri";
 import { Label } from "../common";
 import "./CourseItem.scss";
 export const CourseItem: React.FC<ICourseItem> = ({
@@ -12,6 +13,7 @@ export const CourseItem: React.FC<ICourseItem> = ({
   subject,
   rating,
   onClick,
+  price,
 }) => {
   return (
     <div className="course-item" key={id} onClick={onClick}>
@@ -40,7 +42,17 @@ export const CourseItem: React.FC<ICourseItem> = ({
           />
           <Label
             icon={<AiOutlineBook size={16} />}
-            title={<p className="course-item__title">Subject: {subject}</p>}
+            title={
+              <span className="course-item__title">
+                {subject?.map((item: any, index: number) => {
+                  return <span key={index}> Subject: {item.item} .</span>;
+                })}
+              </span>
+            }
+          />
+          <Label
+            icon={<RiMoneyDollarBoxLine size={16} />}
+            title={<p className="course-item__title">Price: {price}</p>}
           />
         </div>
       </div>

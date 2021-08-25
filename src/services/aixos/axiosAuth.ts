@@ -1,15 +1,16 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
+import { EToken } from "../../constants";
 
 const baseURL = process.env.REACT_APP_BACKEND_SERVER;
 // const baseURL = "https://amitu-backend.herokuapp.com/";
 
-// const token = process.env.TOKEN_AUTH;
+const token = localStorage.getItem(EToken.accessToken);
 
 const axiosAuth = axios.create({
   baseURL: baseURL + "api/",
   headers: {
     "content-type": "application/json",
-    // Authorization: token,
+    Authorization: token,
   },
 });
 axiosAuth.interceptors.response.use(

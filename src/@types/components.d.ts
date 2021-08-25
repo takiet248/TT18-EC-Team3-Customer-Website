@@ -113,9 +113,10 @@ interface ICourseItem {
   name?: string;
   durations?: string;
   level?: string;
-  subject?: string;
+  subject?: Array<{ item: string }>;
   rating?: number;
   onClick?: any;
+  price?: number;
 }
 
 interface IHeartIcon {

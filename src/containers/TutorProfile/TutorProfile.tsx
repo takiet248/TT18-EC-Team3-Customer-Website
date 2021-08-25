@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Avatar,
-  Button,
-  Calendar,
-  HeartIcon,
-  Label,
-} from "../../components/common";
+import { Avatar, Calendar, HeartIcon, Label } from "../../components/common";
 import "./TutorProfile.scss";
 import { IoLocationOutline, IoBriefcaseSharp } from "react-icons/io5";
 import {
@@ -26,7 +20,7 @@ import { ScrollHorizontal } from "../../components/common/ScrollHorizontal/Scrol
 import { useAppDispatch } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
-import { doGetOneTutor } from "../../redux";
+import { doGetOneTutor, doGetTutorCourse, doGetUserInfo } from "../../redux";
 import { CourseItem } from "../../components";
 import { useHistory } from "react-router-dom";
 
@@ -37,9 +31,14 @@ export const TutorProfile = () => {
   const { uid } = useParams<{ uid: string }>();
   const history = useHistory();
   const oneTutor = useSelector((state: RootState) => state.tutorSlice.tutor);
+  const tutorCourse = useSelector(
+    (state: RootState) => state.tutorSlice.tutorCourse
+  );
 
   useEffect(() => {
     dispatch(doGetOneTutor({ uid: uid }));
+    dispatch(doGetTutorCourse({ uid: uid }));
+    dispatch(doGetUserInfo());
     window.scrollTo({ top: 0, left: 0 });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -75,29 +74,10 @@ export const TutorProfile = () => {
               </span>
             </div>
           </div>
-          <Button width={180} marginLeft={16}>
+          {/* <Button width={180} marginLeft={16}>
             BOOK
-          </Button>
+          </Button> */}
         </div>
-        {/* <iframe
-          width="100%"
-          height="400"
-          src="https://www.youtube.com/embed/3YLg9VuCTlU"
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
-        <p
-          style={{
-            fontWeight: "bold",
-            fontSize: 24,
-            marginBottom: 8,
-            marginTop: 16,
-          }}
-        >
-          {oneTutor.name}
-        </p> */}
         <p>{oneTutor.quote}</p>
         <div className="tutor__selection">
           <div className="tutor__selection-item">
@@ -159,18 +139,22 @@ export const TutorProfile = () => {
             marginTop={16}
             paddingBottom={8}
           >
-            {oneTutor.course &&
-              oneTutor.course.map((item: any, index: number) => {
+            {tutorCourse &&
+              tutorCourse.map((item: any, index: number) => {
                 return (
                   <CourseItem
                     key={index}
-                    name={item.id}
-                    durations={item.durations}
+                    name={item.name}
+                    durations={item.duration}
                     rating={item.rating}
                     subject={item.subject}
                     level={item.level}
+                    price={item.price}
                     onClick={() => {
-                      history.push(`/course/${item.id}/${uid}`);
+                      history.push({
+                        pathname: `/course/${item._id}`,
+                        state: { tutorid: uid },
+                      });
                     }}
                   />
                 );
