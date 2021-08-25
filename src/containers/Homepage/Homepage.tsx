@@ -13,7 +13,6 @@ export const Homepage: React.FC = () => {
   const listAllTutor = useSelector(
     (state: RootState) => state.tutorSlice.listAllTutor
   );
-
   useEffect(() => {
     dispatch(doGetAllListTutor());
   }, []); // eslint-disable-line react-hooks/exhaustive-deps

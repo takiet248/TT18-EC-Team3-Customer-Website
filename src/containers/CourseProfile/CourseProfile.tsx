@@ -29,8 +29,6 @@ export const CourseProfile = () => {
   useEffect(() => {
     dispatch(doGetOneCourse({ uid: courseid }));
     dispatch(doGetOneTutor({ uid: state?.tutorid }));
-    console.log(courseid);
-
     window.scrollTo({ top: 0, left: 0 });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

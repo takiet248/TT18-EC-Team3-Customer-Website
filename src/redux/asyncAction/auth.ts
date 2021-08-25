@@ -21,3 +21,19 @@ export const doGetUserInfo = createAsyncThunk("auth@post/GetInfo", async () => {
   const result = await apiAuth.userInfo();
   return result.data;
 });
+
+export const doGetRecommendedTutor = createAsyncThunk(
+  "auth@post/GetRecommenedTutor",
+  async (params: any) => {
+    const result = await apiAuth.recommendTutor(params);
+    return result.data;
+  }
+);
+
+export const doGetRecommendedCourse = createAsyncThunk(
+  "auth@post/GetRecommenedCourse",
+  async (params: any) => {
+    const result = await apiAuth.recommendCourse(params);
+    return result.data;
+  }
+);

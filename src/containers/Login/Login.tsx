@@ -6,6 +6,7 @@ import { doLogin } from "../../redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { EToken } from "../../constants";
 import { useAppDispatch } from "../../redux/store";
+import { useHistory } from "react-router-dom";
 
 type FormValues = {
   email: string;
@@ -13,6 +14,7 @@ type FormValues = {
 };
 export const Login = () => {
   const dispatch = useAppDispatch();
+  const history = useHistory();
   const { register, handleSubmit } = useForm<FormValues>();
 
   const onSubmit = (data: any) => {
@@ -22,7 +24,7 @@ export const Login = () => {
         if (res) {
           const token = res.access;
           window.localStorage.setItem(EToken.accessToken, token);
-          window.location.replace("/");
+          history.goBack();
         }
       });
   };
