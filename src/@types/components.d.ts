@@ -104,6 +104,7 @@ interface ITutor {
   course?: Array<IResCourse>;
   rating?: number;
   education?: Array<{ item: string }>;
+  isLiked?: number;
   handleGotoDetail?: React.MouseEventHandler<HTMLDivElement>;
 }
 
@@ -115,4 +116,16 @@ interface ICourseItem {
   subject?: string;
   rating?: number;
   onClick?: any;
+}
+
+interface IHeartIcon {
+  isLiked?: number;
+  position?: Property.Position;
+  top?: number;
+  left?: number;
+  right?: number;
+  bottom?: number;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  className?: string;
+  typecvviewid?: number;
 }

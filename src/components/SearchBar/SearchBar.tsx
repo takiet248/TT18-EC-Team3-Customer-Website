@@ -1,6 +1,6 @@
 import React from "react";
 import "./SearchBar.scss";
-import {RiSearch2Line} from 'react-icons/ri';
+import {BiSearchAlt} from 'react-icons/bi';
 export const SearchBar: React.FC<ISearchBar> = ({
   className,
   id,
@@ -24,7 +24,7 @@ export const SearchBar: React.FC<ISearchBar> = ({
         autoComplete="off"
         autoFocus={isFocus}
       />
-      <RiSearch2Line className="searchbar__icon" size={25}/>
+      <BiSearchAlt className="searchbar__icon" size={25}/>
     </div>
   );
 };
