@@ -117,6 +117,8 @@ interface ICourseItem {
   rating?: number;
   onClick?: any;
   price?: number;
+  decription?: string;
+  avatar?: string;
 }
 
 interface IHeartIcon {

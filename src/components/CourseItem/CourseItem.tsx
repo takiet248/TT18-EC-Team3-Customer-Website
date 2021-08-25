@@ -14,12 +14,18 @@ export const CourseItem: React.FC<ICourseItem> = ({
   rating,
   onClick,
   price,
+  decription,
+  avatar,
 }) => {
   return (
     <div className="course-item" key={id} onClick={onClick}>
       <div className="course-item__image">
         <img
-          src="https://hacentre.edu.vn/wp-content/uploads/2020/10/tu-vung-ielts-speaking-chu-de-study-work-19.jpg"
+          src={
+            avatar
+              ? avatar
+              : "https://hacentre.edu.vn/wp-content/uploads/2020/10/tu-vung-ielts-speaking-chu-de-study-work-19.jpg"
+          }
           alt=""
         ></img>
       </div>
@@ -55,6 +61,7 @@ export const CourseItem: React.FC<ICourseItem> = ({
             title={<p className="course-item__title">Price: {price}</p>}
           />
         </div>
+        {decription && <p className="course-item__description">{decription}</p>}
       </div>
     </div>
   );
