@@ -1,3 +1,4 @@
+@import "../../assets/scss/variable.scss";
 .paymentMethod-container {
   margin-bottom: 100px;
 
@@ -22,11 +23,15 @@
     }
   }
   .paymentMethod__cardNumber {
-    width: 40%;
+    width: 100%;
     margin: 0 auto;
   }
   .paymentMethod__promoCode {
-    width: 40%;
+    width: 70%;
+    @include tablet {
+      width: 100%;
+      padding: 0 3rem;
+    }
     margin: 0 auto;
     display: flex;
     justify-content: space-around;
@@ -46,7 +51,11 @@
     }
   }
   .paymentMethod__summary {
-    width: 40%;
+    width: 70%;
+    @include tablet {
+      width: 100%;
+      padding: 0 2rem;
+    }
     margin: 0 auto;
   }
   .purchase-button {

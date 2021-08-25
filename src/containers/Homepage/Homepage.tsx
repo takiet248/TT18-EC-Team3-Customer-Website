@@ -4,7 +4,6 @@ import {
   Banner,
   Introduction,
   Tutor,
-  Filter,
   CourseItem,
 } from "../../components";
 import { useSelector } from "react-redux";
@@ -40,7 +39,7 @@ export const Homepage: React.FC = () => {
   return (
     <div className="home">
       <Banner />
-      <Filter />
+      {/* <Filter /> */}
       <div className="home__list-grid">
         {listAllTutor.map((item, index) => (
           <Tutor

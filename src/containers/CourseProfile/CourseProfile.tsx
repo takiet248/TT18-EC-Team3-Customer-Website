@@ -4,7 +4,7 @@ import "./CourseProfile.scss";
 import { useAppDispatch } from "../../redux/store";
 import { CourseItem } from "../../components";
 import { Avatar, HeartIcon, Label } from "../../components/common";
-import { useLocation, useParams } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
 import { doGetOneCourse } from "../../redux/asyncAction/course";
@@ -20,6 +20,7 @@ import { RiMoneyDollarBoxLine } from "react-icons/ri";
 
 export const CourseProfile = () => {
   const dispatch = useAppDispatch();
+  const history = useHistory();
   const { courseid } = useParams<{ courseid: string }>();
   const { state } = useLocation<any>();
   const oneTutor = useSelector((state: RootState) => state.tutorSlice.tutor);
@@ -46,14 +47,14 @@ export const CourseProfile = () => {
           </div>
           <div className="course__right">
             <p style={{ marginBottom: 16 }}></p>
+            {state?.tutorid && (
+              <p style={{ fontSize: 24, fontWeight: "bold", marginBottom: 8 }}>
+                Tutor
+              </p>
+            )}
 
             {state?.tutorid && (
               <div className="course__info">
-                <p
-                  style={{ fontSize: 24, fontWeight: "bold", marginBottom: 8 }}
-                >
-                  Tutor
-                </p>
                 <Avatar
                   image={
                     oneTutor.avatar ||
@@ -108,7 +109,19 @@ export const CourseProfile = () => {
         </div>
         {/* select */}
         <div className="tutor__selection">
-          <div className="tutor__selection-item">
+          <div
+            className="tutor__selection-item"
+            onClick={() =>
+              history.push({
+                pathname: "/payment-method",
+                state: {
+                  tutorid: state?.tutorid,
+                  courseid: oneCourse._id,
+                  price: oneCourse.price,
+                },
+              })
+            }
+          >
             <AiOutlineShoppingCart size={20} />
             <p>BOOK</p>
           </div>
