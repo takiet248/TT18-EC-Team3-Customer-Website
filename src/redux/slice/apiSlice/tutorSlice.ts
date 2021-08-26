@@ -3,14 +3,12 @@ import {
   doLikeTutor,
   doUnlikeTutor,
 } from "./../../asyncAction/auth";
-import { doGetTutorCourse } from "./../../asyncAction/tutor";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { doGetAllListTutor, doGetOneTutor } from "../../asyncAction";
 
 type TTnitialState = {
   listAllTutor: Array<IResTutor>;
   tutor: IResOneTutor;
-  tutorCourse: Array<IResGetCourse>;
   recommendedTutor: Array<IResOneTutor>;
   isLoading: boolean;
   err: any;
@@ -19,9 +17,7 @@ type TTnitialState = {
 const initialState = {
   listAllTutor: [],
   tutor: {},
-  tutorCourse: [],
   recommendedTutor: [],
-
   isLoading: false,
   err: {},
 } as TTnitialState;
@@ -94,21 +90,6 @@ export const slice = createSlice({
       state.isLoading = false;
       state.err = action.error;
     });
-    // get course
-    builder.addCase(doGetTutorCourse.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(
-      doGetTutorCourse.fulfilled,
-      (state, action: PayloadAction<any>) => {
-        state.tutorCourse = action.payload;
-        state.isLoading = false;
-      }
-    );
-    builder.addCase(doGetTutorCourse.rejected, (state, action) => {
-      state.isLoading = false;
-      state.err = action.error;
-    });
     // like Tutor
     builder.addCase(doLikeTutor.pending, (state) => {
       state.isLoading = true;
@@ -117,16 +98,6 @@ export const slice = createSlice({
       doLikeTutor.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.isLoading = false;
-        const newList = state.listAllTutor.map((item, i) => {
-          if (item._id === action.payload._id) {
-            return {
-              ...item,
-              noLike: 1,
-            };
-          }
-          return item;
-        });
-        state.listAllTutor = newList;
       }
     );
     builder.addCase(doLikeTutor.rejected, (state, action) => {

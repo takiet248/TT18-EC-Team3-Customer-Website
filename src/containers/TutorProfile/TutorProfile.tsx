@@ -21,11 +21,14 @@ import { useAppDispatch } from "../../redux/store";
 import { batch, useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
 import {
+  doFakeLikeUnlikeListCourse,
   doFakeLikeUnlikeListTutor,
   doFakeLikeUnlikeTutor,
   doGetOneTutor,
   doGetTutorCourse,
+  doLikeCourse,
   doLikeTutor,
+  doUnlikeCourse,
   doUnlikeTutor,
 } from "../../redux";
 import { CourseItem } from "../../components";
@@ -42,7 +45,7 @@ export const TutorProfile = () => {
   const oneTutor = useSelector((state: RootState) => state.tutorSlice.tutor);
   const [preTime, setPreTime] = useState(0);
   const tutorCourse = useSelector(
-    (state: RootState) => state.tutorSlice.tutorCourse
+    (state: RootState) => state.courseSlice.tutorCourse
   );
 
   useEffect(() => {
@@ -84,6 +87,31 @@ export const TutorProfile = () => {
       dispatch(doUnlikeTutor({ user: userid, tid: _id }));
       dispatch(doFakeLikeUnlikeTutor({ noLike: 0 }));
       dispatch(doFakeLikeUnlikeListTutor({ _id: _id, noLike: 0 }));
+    });
+  };
+
+  //handleLike course
+  const handleLikeCourse = (_id?: string) => {
+    const nowTime = Date.now();
+    setPreTime(nowTime);
+    if (nowTime - preTime < 250) {
+      return;
+    }
+    batch(() => {
+      dispatch(doLikeCourse({ user: userid, cid: _id }));
+      dispatch(doFakeLikeUnlikeListCourse({ _id: _id, noLike: 1 }));
+    });
+  };
+  //handleLike course
+  const handleUnlikeCourse = (_id?: string) => {
+    const nowTime = Date.now();
+    setPreTime(nowTime);
+    if (nowTime - preTime < 250) {
+      return;
+    }
+    batch(() => {
+      dispatch(doUnlikeCourse({ user: userid, cid: _id }));
+      dispatch(doFakeLikeUnlikeListCourse({ _id: _id, noLike: 0 }));
     });
   };
 
@@ -200,6 +228,11 @@ export const TutorProfile = () => {
                     subject={item.subject}
                     level={item.level}
                     price={item.price}
+                    noLike={item.noLike}
+                    handleLikeUnlike={() => {
+                      if (item.noLike === 0) return handleLikeCourse(item._id);
+                      else return handleUnlikeCourse(item._id);
+                    }}
                     onClick={() => {
                       history.push({
                         pathname: `/course/${item._id}`,
