@@ -1,14 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./CourseProfile.scss";
 
 import { useAppDispatch } from "../../redux/store";
 import { CourseItem } from "../../components";
 import { Avatar, HeartIcon, Label } from "../../components/common";
 import { useHistory, useLocation, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { batch, useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
 import { doGetOneCourse } from "../../redux/asyncAction/course";
-import { doGetOneTutor } from "../../redux";
+import {
+  doFakeLikeUnlikeCourse,
+  doFakeLikeUnlikeListCourse,
+  doGetOneTutor,
+  doLikeCourse,
+  doUnlikeCourse,
+} from "../../redux";
 import { IoSchoolOutline } from "react-icons/io5";
 import { GiSandsOfTime } from "react-icons/gi";
 import {
@@ -17,21 +23,53 @@ import {
   AiOutlineStar,
 } from "react-icons/ai";
 import { RiMoneyDollarBoxLine } from "react-icons/ri";
+import { EUser } from "../../constants";
 
 export const CourseProfile = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
   const { courseid } = useParams<{ courseid: string }>();
   const { state } = useLocation<any>();
+  const userid = localStorage.getItem(EUser.userid);
   const oneTutor = useSelector((state: RootState) => state.tutorSlice.tutor);
   const oneCourse = useSelector(
     (state: RootState) => state.courseSlice.oneCourse
   );
+  const [preTime, setPreTime] = useState(0);
+
   useEffect(() => {
     dispatch(doGetOneCourse({ uid: courseid }));
     dispatch(doGetOneTutor({ uid: state?.tutorid }));
     window.scrollTo({ top: 0, left: 0 });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  //handleLike
+  const handleLike = (_id: string) => {
+    const nowTime = Date.now();
+    setPreTime(nowTime);
+    if (nowTime - preTime < 250) {
+      return;
+    }
+    batch(() => {
+      dispatch(doLikeCourse({ user: userid, cid: _id }));
+      dispatch(doFakeLikeUnlikeCourse({ noLike: 1 }));
+      dispatch(doFakeLikeUnlikeListCourse({ _id: _id, noLike: 1 }));
+    });
+  };
+
+  //handle unLike
+  const handleUnlike = (_id: string) => {
+    const nowTime = Date.now();
+    setPreTime(nowTime);
+    if (nowTime - preTime < 250) {
+      return;
+    }
+    batch(() => {
+      dispatch(doUnlikeCourse({ user: userid, cid: _id }));
+      dispatch(doFakeLikeUnlikeCourse({ noLike: 0 }));
+      dispatch(doFakeLikeUnlikeListCourse({ _id: _id, noLike: 0 }));
+    });
+  };
 
   return (
     <div className="course-container">
@@ -43,6 +81,7 @@ export const CourseProfile = () => {
               name={oneCourse?.name}
               rating={oneCourse?.rating}
               decription={oneCourse?.overview}
+              handleLikeUnlike={() => console.log()}
             />
           </div>
           <div className="course__right">
@@ -126,7 +165,13 @@ export const CourseProfile = () => {
             <p>BOOK</p>
           </div>
           <div className="tutor__selection-item">
-            <HeartIcon noLike={oneTutor.noLike} />
+            <HeartIcon
+              noLike={oneCourse.noLike}
+              onClick={() => {
+                if (oneCourse.noLike === 0) return handleLike(courseid);
+                else return handleUnlike(courseid);
+              }}
+            />
             <p>Like</p>
           </div>
           <div className="tutor__selection-item">

@@ -9,9 +9,9 @@
 }
 .course {
   padding: 50px 0;
-  width: 70%;
+  width: 60%;
   @include tablet {
-    width: 80%;
+    width: 90%;
     iframe {
       height: 300px;
     }
@@ -37,6 +37,7 @@
     }
     @include tablet {
     }
+
     .course-item {
       height: fit-content;
       max-height: unset;
@@ -45,7 +46,8 @@
       max-width: unset;
       min-width: unset;
     }
-    .course-item__label {
+    .course-item__label,
+    .course-item__action {
       display: none;
     }
     .course-item__image {

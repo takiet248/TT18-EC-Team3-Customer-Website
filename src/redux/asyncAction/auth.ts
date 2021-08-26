@@ -53,3 +53,19 @@ export const doUnlikeTutor = createAsyncThunk(
     return result.data;
   }
 );
+
+export const doLikeCourse = createAsyncThunk(
+  "auth@post/LikeCourse",
+  async (params: { user: string | null; cid?: string }) => {
+    const result = await apiAuth.likeCourse(params);
+    return result.data;
+  }
+);
+
+export const doUnlikeCourse = createAsyncThunk(
+  "auth@post/UnlikeCourse",
+  async (params: { user: string | null; cid?: string }) => {
+    const result = await apiAuth.unlikeCourse(params);
+    return result.data;
+  }
+);

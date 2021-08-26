@@ -3,7 +3,7 @@ import { AiFillStar, AiOutlineBook } from "react-icons/ai";
 import { GiSandsOfTime } from "react-icons/gi";
 import { IoSchoolOutline } from "react-icons/io5";
 import { RiMoneyDollarBoxLine } from "react-icons/ri";
-import { Label } from "../common";
+import { HeartIcon, Label } from "../common";
 import "./CourseItem.scss";
 export const CourseItem: React.FC<ICourseItem> = ({
   id,
@@ -16,6 +16,8 @@ export const CourseItem: React.FC<ICourseItem> = ({
   price,
   decription,
   avatar,
+  noLike,
+  handleLikeUnlike,
 }) => {
   return (
     <div className="course-item" key={id} onClick={onClick}>
@@ -28,6 +30,15 @@ export const CourseItem: React.FC<ICourseItem> = ({
           }
           alt=""
         ></img>
+        <div className="course-item__action">
+          <HeartIcon
+            noLike={noLike}
+            onClick={(e) => {
+              e.stopPropagation();
+              return handleLikeUnlike();
+            }}
+          />
+        </div>
       </div>
       <div className="course-item__info">
         <div className="course-item__header">

@@ -5,11 +5,14 @@ import { batch, useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
 import { useAppDispatch } from "../../redux/store";
 import {
+  doFakeLikeUnlikeListCourse,
   doFakeLikeUnlikeListTutor,
   doGetAllListTutor,
   doGetRecommendedCourse,
   doGetRecommendedTutor,
+  doLikeCourse,
   doLikeTutor,
+  doUnlikeCourse,
   doUnlikeTutor,
 } from "../../redux";
 import { useHistory } from "react-router";
@@ -27,7 +30,7 @@ export const Homepage: React.FC = () => {
     (state: RootState) => state.tutorSlice.recommendedTutor
   );
   const recommendedCourse = useSelector(
-    (state: RootState) => state.auth.recommendedCourse
+    (state: RootState) => state.courseSlice.recommendedCourse
   );
   const userid = localStorage.getItem(EUser.userid);
   const [preTime, setPreTime] = useState(0);
@@ -39,8 +42,8 @@ export const Homepage: React.FC = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   console.log(listAllTutor);
 
-  //handleLike
-  const handleLike = (_id?: string) => {
+  //handleLike tutor
+  const handleLikeTutor = (_id?: string) => {
     const nowTime = Date.now();
     setPreTime(nowTime);
     if (nowTime - preTime < 250) {
@@ -51,8 +54,8 @@ export const Homepage: React.FC = () => {
       dispatch(doFakeLikeUnlikeListTutor({ _id: _id, noLike: 1 }));
     });
   };
-  //handleLike
-  const handleUnlike = (_id?: string) => {
+  //handleLike tutor
+  const handleUnlikeTutor = (_id?: string) => {
     const nowTime = Date.now();
     setPreTime(nowTime);
     if (nowTime - preTime < 250) {
@@ -61,6 +64,31 @@ export const Homepage: React.FC = () => {
     batch(() => {
       dispatch(doUnlikeTutor({ user: userid, tid: _id }));
       dispatch(doFakeLikeUnlikeListTutor({ _id: _id, noLike: 0 }));
+    });
+  };
+
+  //handleLike course
+  const handleLikeCourse = (_id?: string) => {
+    const nowTime = Date.now();
+    setPreTime(nowTime);
+    if (nowTime - preTime < 250) {
+      return;
+    }
+    batch(() => {
+      dispatch(doLikeCourse({ user: userid, cid: _id }));
+      dispatch(doFakeLikeUnlikeListCourse({ _id: _id, noLike: 1 }));
+    });
+  };
+  //handleLike course
+  const handleUnlikeCourse = (_id?: string) => {
+    const nowTime = Date.now();
+    setPreTime(nowTime);
+    if (nowTime - preTime < 250) {
+      return;
+    }
+    batch(() => {
+      dispatch(doUnlikeCourse({ user: userid, cid: _id }));
+      dispatch(doFakeLikeUnlikeListCourse({ _id: _id, noLike: 0 }));
     });
   };
 
@@ -81,8 +109,8 @@ export const Homepage: React.FC = () => {
             education={item.education}
             noLike={item.noLike}
             handleLikeUnlike={() => {
-              if (item.noLike === 0) return handleLike(item._id);
-              else return handleUnlike(item._id);
+              if (item.noLike === 0) return handleLikeTutor(item._id);
+              else return handleUnlikeTutor(item._id);
             }}
             handleGotoDetail={() => {
               history.push(`/tutor/${item._id}`);
@@ -110,10 +138,14 @@ export const Homepage: React.FC = () => {
                   subject={item.subject}
                   level={item.level}
                   price={item.price}
+                  noLike={item.noLike}
+                  handleLikeUnlike={() => {
+                    if (item.noLike === 0) return handleLikeCourse(item._id);
+                    else return handleUnlikeCourse(item._id);
+                  }}
                   onClick={() => {
                     history.push({
                       pathname: `/course/${item._id}`,
-                      // state: { tutorid: uid },
                     });
                   }}
                 />
@@ -143,8 +175,8 @@ export const Homepage: React.FC = () => {
                   education={item.education}
                   noLike={item.noLike}
                   handleLikeUnlike={() => {
-                    if (item.noLike === 0) return handleLike(item._id);
-                    else return handleUnlike(item._id);
+                    if (item.noLike === 0) return handleLikeTutor(item._id);
+                    else return handleUnlikeTutor(item._id);
                   }}
                   handleGotoDetail={() => {
                     history.push(`/tutor/${item._id}`);

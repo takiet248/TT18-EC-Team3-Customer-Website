@@ -1,5 +1,4 @@
 import {
-  doGetRecommendedCourse,
   doGetUserInfo,
   doRegister,
 } from "./../../asyncAction/auth";
@@ -8,13 +7,11 @@ import { doLogin } from "../../asyncAction";
 
 type TTnitialState = {
   isLoading: boolean;
-  recommendedCourse: Array<IResGetCourse>;
   err: any;
 };
 
 const initialState = {
   isLoading: false,
-  recommendedCourse: [],
   err: {},
 } as TTnitialState;
 
@@ -65,22 +62,7 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.err = action.error;
     });
-   
-    //get recommend course
-    builder.addCase(doGetRecommendedCourse.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(
-      doGetRecommendedCourse.fulfilled,
-      (state, action: PayloadAction<any>) => {
-        state.recommendedCourse = action.payload;
-        state.isLoading = false;
-      }
-    );
-    builder.addCase(doGetRecommendedCourse.rejected, (state, action) => {
-      state.isLoading = false;
-      state.err = action.error;
-    });
+  
   },
 });
 
