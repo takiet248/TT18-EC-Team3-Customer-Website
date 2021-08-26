@@ -24,7 +24,7 @@ interface IResTutor {
   exp?: string;
   rating?: number;
   personality?: string;
-  noLike?: number;
+  noLike: number;
   noOngoingCourse?: number;
   available?: Array<IResAvailable>;
   level?: string;

@@ -104,7 +104,8 @@ interface ITutor {
   course?: Array<IResCourse>;
   rating?: number;
   education?: Array<{ item: string }>;
-  isLiked?: number;
+  noLike?: number;
+  handleLikeUnlike: () => void;
   handleGotoDetail?: React.MouseEventHandler<HTMLDivElement>;
 }
 
@@ -122,7 +123,7 @@ interface ICourseItem {
 }
 
 interface IHeartIcon {
-  isLiked?: number;
+  noLike?: number;
   position?: Property.Position;
   top?: number;
   left?: number;
