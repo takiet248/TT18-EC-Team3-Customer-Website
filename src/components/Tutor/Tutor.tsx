@@ -7,15 +7,19 @@ import { HeartIcon, Label } from "../common";
 import "./Tutor.scss";
 
 export const Tutor: React.FC<ITutor> = ({
+  _id,
   name,
   avatar,
   address,
   major,
   rating,
   education,
-  isLiked,
+  noLike,
+  handleLikeUnlike,
   handleGotoDetail,
 }) => {
+  console.log(noLike);
+
   return (
     <div className="tutor-item" onClick={handleGotoDetail}>
       <div className="tutor-item__image">
@@ -27,7 +31,13 @@ export const Tutor: React.FC<ITutor> = ({
           alt=""
         />
         <div className="tutor-item__action">
-          <HeartIcon isLiked={isLiked} />
+          <HeartIcon
+            noLike={noLike}
+            onClick={(e) => {
+              e.stopPropagation();
+              return handleLikeUnlike();
+            }}
+          />
         </div>
       </div>
 

@@ -126,7 +126,7 @@ export const CourseProfile = () => {
             <p>BOOK</p>
           </div>
           <div className="tutor__selection-item">
-            <HeartIcon isLiked={oneTutor.noLike} />
+            <HeartIcon noLike={oneTutor.noLike} />
             <p>Like</p>
           </div>
           <div className="tutor__selection-item">

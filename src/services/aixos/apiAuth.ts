@@ -22,4 +22,12 @@ export const apiAuth = {
     const url = baseURL + "recommend/course";
     return axiosAuth.post(url, params);
   },
+  likeTutor: (params: { user: string | null; tid?: string }) => {
+    const url = baseURL + "tutor/like";
+    return axiosAuth.post(url, params);
+  },
+  unlikeTutor: (params: { user: string | null; tid?: string }) => {
+    const url = baseURL + "tutor/unlike";
+    return axiosAuth.post(url, params);
+  },
 };

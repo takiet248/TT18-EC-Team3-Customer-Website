@@ -37,3 +37,19 @@ export const doGetRecommendedCourse = createAsyncThunk(
     return result.data;
   }
 );
+
+export const doLikeTutor = createAsyncThunk(
+  "auth@post/LikeTutor",
+  async (params: { user: string | null; tid?: string }) => {
+    const result = await apiAuth.likeTutor(params);
+    return result.data;
+  }
+);
+
+export const doUnlikeTutor = createAsyncThunk(
+  "auth@post/UnlikeTutor",
+  async (params: { user: string | null; tid?: string }) => {
+    const result = await apiAuth.unlikeTutor(params);
+    return result.data;
+  }
+);

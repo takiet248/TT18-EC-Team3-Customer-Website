@@ -18,19 +18,29 @@ import { translateDay } from "../../helpers";
 import { useParams } from "react-router";
 import { ScrollHorizontal } from "../../components/common/ScrollHorizontal/ScrollHorizontal";
 import { useAppDispatch } from "../../redux/store";
-import { useSelector } from "react-redux";
+import { batch, useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
-import { doGetOneTutor, doGetTutorCourse } from "../../redux";
+import {
+  doFakeLikeUnlikeListTutor,
+  doFakeLikeUnlikeTutor,
+  doGetOneTutor,
+  doGetTutorCourse,
+  doLikeTutor,
+  doUnlikeTutor,
+} from "../../redux";
 import { CourseItem } from "../../components";
 import { useHistory } from "react-router-dom";
+import { EUser } from "../../constants";
 
 export const TutorProfile = () => {
   const dispatch = useAppDispatch();
   const [date, setDate] = useState(new Date());
   const [, setDay] = useState(translateDay(new Date()));
   const { uid } = useParams<{ uid: string }>();
+  const userid = localStorage.getItem(EUser.userid);
   const history = useHistory();
   const oneTutor = useSelector((state: RootState) => state.tutorSlice.tutor);
+  const [preTime, setPreTime] = useState(0);
   const tutorCourse = useSelector(
     (state: RootState) => state.tutorSlice.tutorCourse
   );
@@ -49,9 +59,38 @@ export const TutorProfile = () => {
   //handle move to next month on calendar
   const onChangePreAndNext = (month: any, year: any) => {};
 
+  //handleLike
+  const handleLike = (_id: string) => {
+    const nowTime = Date.now();
+    setPreTime(nowTime);
+    if (nowTime - preTime < 250) {
+      return;
+    }
+    batch(() => {
+      dispatch(doLikeTutor({ user: userid, tid: _id }));
+      dispatch(doFakeLikeUnlikeTutor({ noLike: 1 }));
+      dispatch(doFakeLikeUnlikeListTutor({ _id: _id, noLike: 1 }));
+    });
+  };
+
+  //handle unLike
+  const handleUnlike = (_id: string) => {
+    const nowTime = Date.now();
+    setPreTime(nowTime);
+    if (nowTime - preTime < 250) {
+      return;
+    }
+    batch(() => {
+      dispatch(doUnlikeTutor({ user: userid, tid: _id }));
+      dispatch(doFakeLikeUnlikeTutor({ noLike: 0 }));
+      dispatch(doFakeLikeUnlikeListTutor({ _id: _id, noLike: 0 }));
+    });
+  };
+
   return (
     <div className="tutor-container">
       <div className="tutor">
+        {/* header */}
         <div className="tutor__header">
           <div className="tutor__info">
             <Avatar image={oneTutor.avatar} height={80} width={80} />
@@ -73,18 +112,23 @@ export const TutorProfile = () => {
               </span>
             </div>
           </div>
-          {/* <Button width={180} marginLeft={16}>
-            BOOK
-          </Button> */}
         </div>
-        <p>{oneTutor.quote}</p>
+        {/* quote */}
+        <p style={{ whiteSpace: "pre-wrap" }}>{oneTutor.quote}</p>
+        {/* selection bar */}
         <div className="tutor__selection">
           <div className="tutor__selection-item">
             <AiOutlineCalendar size={20} />
             <p>Schedule</p>
           </div>
           <div className="tutor__selection-item">
-            <HeartIcon isLiked={oneTutor.noLike} />
+            <HeartIcon
+              noLike={oneTutor.noLike}
+              onClick={() => {
+                if (oneTutor.noLike === 0) return handleLike(uid);
+                else return handleUnlike(uid);
+              }}
+            />
             <p>Like</p>
           </div>
           <div className="tutor__selection-item">
@@ -92,21 +136,26 @@ export const TutorProfile = () => {
             <p>Vote</p>
           </div>
         </div>
+        {/* personality */}
         <Label icon={<FaUserTie size={22} />} title={"Personality"} />
         <div className="tutor__description">{oneTutor.personality}</div>
+        {/* education */}
         <Label icon={<FaGraduationCap size={22} />} title={"Education"} />
         <div className="tutor__description">
           {oneTutor?.education?.map((item: any, index: number) => {
             return <div key={index}>{item.item}</div>;
           })}
         </div>
+        {/* accent */}
         <Label icon={<MdRecordVoiceOver size={22} />} title={"Accent"} />
         <p className="tutor__description">{oneTutor.accent}</p>
+        {/* experience */}
         <Label
           icon={<IoBriefcaseSharp size={20} />}
           title={"Work Experience"}
         />
         <p className="tutor__description">{oneTutor.exp}</p>
+        {/* major */}
         <Label icon={<FaChalkboardTeacher size={20} />} title={"Major"} />
         <div className="tutor__teaching-level">
           {oneTutor.major?.map((item: any, index: number) => {
@@ -117,6 +166,7 @@ export const TutorProfile = () => {
             );
           })}
         </div>
+        {/* degree */}
         <Label icon={<AiFillSafetyCertificate size={20} />} title={"Degree"} />
         <div className="tutor__teaching-level">
           {oneTutor.degree?.map((item: any, index: number) => {
@@ -127,7 +177,7 @@ export const TutorProfile = () => {
             );
           })}
         </div>
-
+        {/* tutor list */}
         <div className="tutor__courses-list">
           <p style={{ fontWeight: "bold", fontSize: 18, marginBottom: 8 }}>
             {oneTutor.name} teaches these courses
@@ -161,7 +211,7 @@ export const TutorProfile = () => {
               })}
           </ScrollHorizontal>
         </div>
-
+        {/* calendar */}
         <div className="tutor__calendar">
           <Calendar
             onSelect={(v) => getDate(v)}
