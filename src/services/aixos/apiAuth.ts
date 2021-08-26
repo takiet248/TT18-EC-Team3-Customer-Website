@@ -30,4 +30,12 @@ export const apiAuth = {
     const url = baseURL + "tutor/unlike";
     return axiosAuth.post(url, params);
   },
+  likeCourse: (params: { user: string | null; cid?: string }) => {
+    const url = baseURL + "course/like";
+    return axiosAuth.post(url, params);
+  },
+  unlikeCourse: (params: { user: string | null; cid?: string }) => {
+    const url = baseURL + "course/unlike";
+    return axiosAuth.post(url, params);
+  },
 };

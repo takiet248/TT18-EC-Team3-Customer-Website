@@ -120,6 +120,8 @@ interface ICourseItem {
   price?: number;
   decription?: string;
   avatar?: string;
+  noLike?: number;
+  handleLikeUnlike: () => void;
 }
 
 interface IHeartIcon {
