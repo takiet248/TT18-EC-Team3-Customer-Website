@@ -18,8 +18,6 @@ export const Tutor: React.FC<ITutor> = ({
   handleLikeUnlike,
   handleGotoDetail,
 }) => {
-  console.log(noLike);
-
   return (
     <div className="tutor-item" onClick={handleGotoDetail}>
       <div className="tutor-item__image">

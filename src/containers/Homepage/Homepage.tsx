@@ -40,7 +40,6 @@ export const Homepage: React.FC = () => {
     dispatch(doGetRecommendedTutor({}));
     dispatch(doGetRecommendedCourse({}));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  console.log(listAllTutor);
 
   //handleLike tutor
   const handleLikeTutor = (_id?: string) => {

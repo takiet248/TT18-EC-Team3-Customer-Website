@@ -7,3 +7,5 @@ export * from "./CourseItem/CourseItem";
 export * from "./Introduction/Introduction";
 export * from "./Filter/Filter";
 export * from "./PaymentSummary/PaymentSummary";
+export * from "./Modal/Modal";
+export * from "./ModalVoting/ModalVoting";

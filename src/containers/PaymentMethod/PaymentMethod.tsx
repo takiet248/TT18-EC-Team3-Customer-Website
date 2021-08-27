@@ -37,7 +37,6 @@ export const PaymentMethod = () => {
   //   // }
   // }, [sdkReady]);
   const successPaymentHandler = (data: any) => {
-    console.log(data.payer.email_address);
     dispatch(
       doPaySuccess({
         uid: state?.tutorid,

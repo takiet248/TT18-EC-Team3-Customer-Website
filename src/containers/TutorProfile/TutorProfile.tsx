@@ -24,14 +24,16 @@ import {
   doFakeLikeUnlikeListCourse,
   doFakeLikeUnlikeListTutor,
   doFakeLikeUnlikeTutor,
+  doFakeRateTutor,
   doGetOneTutor,
   doGetTutorCourse,
   doLikeCourse,
   doLikeTutor,
+  doRateTutor,
   doUnlikeCourse,
   doUnlikeTutor,
 } from "../../redux";
-import { CourseItem } from "../../components";
+import { CourseItem, ModalVoting } from "../../components";
 import { useHistory } from "react-router-dom";
 import { EUser } from "../../constants";
 
@@ -47,13 +49,22 @@ export const TutorProfile = () => {
   const tutorCourse = useSelector(
     (state: RootState) => state.courseSlice.tutorCourse
   );
+  const [shown, setShown] = useState(false);
+  const [rating, setRating] = useState(0);
 
+  //init
   useEffect(() => {
     dispatch(doGetOneTutor({ uid: uid }));
     dispatch(doGetTutorCourse({ uid: uid }));
     window.scrollTo({ top: 0, left: 0 });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  //get rating
+  useEffect(() => {
+    setRating(oneTutor.rating!);
+  }, [oneTutor]);
+
+  //get Date
   const getDate = (date: Date) => {
     setDate(date);
     setDay(translateDay(date));
@@ -115,6 +126,13 @@ export const TutorProfile = () => {
     });
   };
 
+  //handle rate
+  const handleRate = () => {
+    dispatch(doRateTutor({ tid: uid, rate: rating }));
+    dispatch(doFakeRateTutor({ rating: rating }));
+    setShown(false);
+  };
+
   return (
     <div className="tutor-container">
       <div className="tutor">
@@ -159,7 +177,7 @@ export const TutorProfile = () => {
             />
             <p>Like</p>
           </div>
-          <div className="tutor__selection-item">
+          <div className="tutor__selection-item" onClick={() => setShown(true)}>
             <AiOutlineStar size={20} />
             <p>Vote</p>
           </div>
@@ -244,6 +262,16 @@ export const TutorProfile = () => {
               })}
           </ScrollHorizontal>
         </div>
+        <ModalVoting
+          isShow={shown}
+          onClick={handleRate}
+          name={oneTutor.name}
+          rating={rating}
+          setRating={(rate: number) => {
+            setRating(rate);
+          }}
+        />
+
         {/* calendar */}
         <div className="tutor__calendar">
           <Calendar
