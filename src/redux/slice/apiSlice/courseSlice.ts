@@ -1,5 +1,5 @@
 import { doGetTutorCourse } from "./../../asyncAction/tutor";
-import { doGetRecommendedCourse } from "./../../asyncAction/auth";
+import { doGetRecommendedCourse, doRateCourse } from "./../../asyncAction/auth";
 import { doGetAllListCourse, doGetOneCourse } from "./../../asyncAction/course";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { doLikeCourse, doUnlikeCourse } from "../../asyncAction";
@@ -67,6 +67,11 @@ export const courseSlice = createSlice({
     doFakeLikeUnlikeCourse(state, action: PayloadAction<{ noLike?: number }>) {
       const newTutor = state.oneCourse;
       newTutor.noLike = action.payload.noLike;
+      state.oneCourse = newTutor;
+    },
+    doFakeRateCourse(state, action: PayloadAction<{ rating?: number }>) {
+      const newTutor = state.oneCourse;
+      newTutor.rating = action.payload.rating;
       state.oneCourse = newTutor;
     },
   },
@@ -159,9 +164,27 @@ export const courseSlice = createSlice({
       state.isLoading = false;
       state.err = action.error;
     });
+    // rate course
+    builder.addCase(doRateCourse.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(
+      doRateCourse.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.isLoading = false;
+      }
+    );
+    builder.addCase(doRateCourse.rejected, (state, action) => {
+      state.isLoading = false;
+      state.err = action.error;
+    });
   },
 });
 
 const { reducer, actions } = courseSlice;
-export const { doFakeLikeUnlikeListCourse, doFakeLikeUnlikeCourse } = actions;
+export const {
+  doFakeLikeUnlikeListCourse,
+  doFakeLikeUnlikeCourse,
+  doFakeRateCourse,
+} = actions;
 export default reducer;

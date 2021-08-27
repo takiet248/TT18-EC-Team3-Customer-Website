@@ -135,3 +135,22 @@ interface IHeartIcon {
   className?: string;
   typecvviewid?: number;
 }
+
+interface IModal {
+  isShow?: boolean | string;
+  className?: string;
+  setIsShow?: any;
+  backgroundColorOverlay?: string;
+  classNameContainer?: string;
+}
+
+interface IModalVoting {
+  name?: string;
+  className?: string;
+  isShow?: boolean | string;
+  isModalShown?: boolean;
+  onClick?: (event: any) => void;
+  classNameContainer?: string;
+  rating: number;
+  setRating?: any;
+}

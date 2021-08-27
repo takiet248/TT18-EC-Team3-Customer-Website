@@ -38,4 +38,12 @@ export const apiAuth = {
     const url = baseURL + "course/unlike";
     return axiosAuth.post(url, params);
   },
+  rateTutor: (params: { tid?: string; rate: number }) => {
+    const url = baseURL + "tutor/rate";
+    return axiosAuth.post(url, params);
+  },
+  rateCourse: (params: { cid?: string; rate: number }) => {
+    const url = baseURL + "course/rate";
+    return axiosAuth.post(url, params);
+  },
 };

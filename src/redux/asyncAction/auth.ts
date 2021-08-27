@@ -69,3 +69,19 @@ export const doUnlikeCourse = createAsyncThunk(
     return result.data;
   }
 );
+
+export const doRateTutor = createAsyncThunk(
+  "auth@post/RateTutor",
+  async (params: { tid?: string; rate: number }) => {
+    const result = await apiAuth.rateTutor(params);
+    return result.data;
+  }
+);
+
+export const doRateCourse = createAsyncThunk(
+  "auth@post/RateCourse",
+  async (params: { cid?: string; rate: number }) => {
+    const result = await apiAuth.rateCourse(params);
+    return result.data;
+  }
+);

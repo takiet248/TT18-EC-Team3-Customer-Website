@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./CourseProfile.scss";
 
 import { useAppDispatch } from "../../redux/store";
-import { CourseItem } from "../../components";
+import { CourseItem, ModalVoting } from "../../components";
 import { Avatar, HeartIcon, Label } from "../../components/common";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import { batch, useSelector } from "react-redux";
@@ -11,8 +11,10 @@ import { doGetOneCourse } from "../../redux/asyncAction/course";
 import {
   doFakeLikeUnlikeCourse,
   doFakeLikeUnlikeListCourse,
+  doFakeRateCourse,
   doGetOneTutor,
   doLikeCourse,
+  doRateCourse,
   doUnlikeCourse,
 } from "../../redux";
 import { IoSchoolOutline } from "react-icons/io5";
@@ -36,7 +38,8 @@ export const CourseProfile = () => {
     (state: RootState) => state.courseSlice.oneCourse
   );
   const [preTime, setPreTime] = useState(0);
-
+  const [shown, setShown] = useState(false);
+  const [rating, setRating] = useState(0);
   useEffect(() => {
     dispatch(doGetOneCourse({ uid: courseid }));
     dispatch(doGetOneTutor({ uid: state?.tutorid }));
@@ -69,6 +72,17 @@ export const CourseProfile = () => {
       dispatch(doFakeLikeUnlikeCourse({ noLike: 0 }));
       dispatch(doFakeLikeUnlikeListCourse({ _id: _id, noLike: 0 }));
     });
+  };
+  //get rating
+  useEffect(() => {
+    setRating(oneCourse.rating!);
+  }, [oneCourse]);
+
+  //handle rate
+  const handleRate = () => {
+    dispatch(doRateCourse({ cid: courseid, rate: rating }));
+    dispatch(doFakeRateCourse({ rating: rating }));
+    setShown(false);
   };
 
   return (
@@ -174,7 +188,7 @@ export const CourseProfile = () => {
             />
             <p>Like</p>
           </div>
-          <div className="tutor__selection-item">
+          <div className="tutor__selection-item" onClick={() => setShown(true)}>
             <AiOutlineStar size={20} />
             <p>Vote</p>
           </div>
@@ -191,6 +205,15 @@ export const CourseProfile = () => {
             );
           })}
         </div>
+        <ModalVoting
+          isShow={shown}
+          onClick={handleRate}
+          name={oneTutor.name}
+          rating={rating}
+          setRating={(rate: number) => {
+            setRating(rate);
+          }}
+        />
       </div>
     </div>
   );

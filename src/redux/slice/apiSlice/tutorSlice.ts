@@ -1,6 +1,7 @@
 import {
   doGetRecommendedTutor,
   doLikeTutor,
+  doRateTutor,
   doUnlikeTutor,
 } from "./../../asyncAction/auth";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
@@ -58,6 +59,11 @@ export const slice = createSlice({
       newTutor.noLike = action.payload.noLike;
       state.tutor = newTutor;
     },
+    doFakeRateTutor(state, action: PayloadAction<{ rating?: number }>) {
+      const newTutor = state.tutor;
+      newTutor.rating = action.payload.rating;
+      state.tutor = newTutor;
+    },
   },
   extraReducers: (builder) => {
     //get all
@@ -81,7 +87,7 @@ export const slice = createSlice({
     });
     builder.addCase(
       doGetOneTutor.fulfilled,
-      (state, action: PayloadAction<IResGetOneTutor>) => {
+      (state, action: PayloadAction<any>) => {
         state.tutor = action.payload.tutor;
         state.isLoading = false;
       }
@@ -133,9 +139,27 @@ export const slice = createSlice({
       state.isLoading = false;
       state.err = action.error;
     });
+    // rate tutor
+    builder.addCase(doRateTutor.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(
+      doRateTutor.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.isLoading = false;
+      }
+    );
+    builder.addCase(doRateTutor.rejected, (state, action) => {
+      state.isLoading = false;
+      state.err = action.error;
+    });
   },
 });
 
 const { actions, reducer } = slice;
-export const { doFakeLikeUnlikeListTutor, doFakeLikeUnlikeTutor } = actions;
+export const {
+  doFakeLikeUnlikeListTutor,
+  doFakeLikeUnlikeTutor,
+  doFakeRateTutor,
+} = actions;
 export default reducer;

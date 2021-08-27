@@ -9,6 +9,9 @@
     justify-items: center;
     align-items: center;
     grid-gap: 10px;
+    @include desktop {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
     @include tablet {
       grid-template-columns: 1fr 1fr;
     }

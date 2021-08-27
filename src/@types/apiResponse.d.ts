@@ -22,7 +22,7 @@ interface IResTutor {
   quote?: string;
   education?: Array<IResEducation>;
   exp?: string;
-  rating?: number;
+  rating: number;
   personality?: string;
   noLike: number;
   noOngoingCourse?: number;
