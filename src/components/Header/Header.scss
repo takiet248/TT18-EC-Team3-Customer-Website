@@ -68,10 +68,19 @@
     }
   }
   &__navlist {
-    display: block;
+    display: none !important;
     font-size: 30px;
     cursor: pointer;
     margin-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include tablet {
+      display: block !important;
+    }
+    @include mobile {
+      display: block !important;
+    }
   }
   &__navside {
     height: 100%;
