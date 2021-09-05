@@ -154,3 +154,9 @@ interface IModalVoting {
   rating: number;
   setRating?: any;
 }
+
+interface IPaymentSummary {
+  promo?: number;
+  fullprice?: number;
+  total?: number;
+}

@@ -68,13 +68,22 @@
     }
   }
   &__navlist {
-    display: none !important;
+    display: block;
     font-size: 30px;
     cursor: pointer;
     margin-left: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include tablet {
+      display: block !important;
+    }
+    @include mobile {
+      display: block !important;
+    }
+  }
+  &__nav {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+    margin-left: 20px;
     @include tablet {
       display: block !important;
     }

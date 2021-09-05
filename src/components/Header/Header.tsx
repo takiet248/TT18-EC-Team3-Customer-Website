@@ -48,7 +48,7 @@ export const Header = () => {
             </Button>
             <Button onClick={() => history.push("/sign-up")}>Sign Up</Button>
           </div>
-          <span className="header__navlist" onClick={handleOpenNavSide}>
+          <span className="header__nav" onClick={handleOpenNavSide}>
             &#9776;
           </span>
         </>
