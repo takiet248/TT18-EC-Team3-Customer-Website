@@ -1,9 +1,8 @@
 import React from "react";
 import "./Header.scss";
 import logo from "../../assets/icons/primary.png";
-import logoMobile from "../../assets/icons/logo-mobile.png";
+import logoMobile from "../../assets/icons/secondary.png";
 import { SearchBar } from "../SearchBar/SearchBar";
-// import { FiBell } from "react-icons/fi";
 import { Button } from "../common";
 import { useHistory } from "react-router";
 import { isAuth, logout } from "../../helpers";
@@ -49,14 +48,11 @@ export const Header = () => {
           <Button onClick={() => history.push("/sign-up")}>Sign Up</Button>
         </div>
       ) : (
-        <Button
-          marginLeft={16}
-          onClick={() => {
-            logout();
-          }}
-        >
-          LOG OUT
-        </Button>
+        <>
+          <span className="header__navlist" onClick={handleOpenNavSide}>
+            &#9776;
+          </span>
+        </>
       )}
       <div
         className="header__navside"
@@ -65,35 +61,39 @@ export const Header = () => {
         <div className="navside-close" onClick={handleCloseNavSide}>
           &times;
         </div>
-        <p
-          onClick={() => {
-            history.push("/login");
-            handleCloseNavSide();
-          }}
-        >
-          Login
-        </p>
-        <p
-          onClick={() => {
-            history.push("/sign-up");
-            handleCloseNavSide();
-          }}
-        >
-          Sign Up
-        </p>
-        <p>Notifications</p>
-        <p
-          onClick={() => {
-            logout();
-            handleCloseNavSide();
-          }}
-        >
-          Log out
-        </p>
+        {isAuth() ? (
+          <>
+            <p
+              onClick={() => {
+                history.push("/login");
+                handleCloseNavSide();
+              }}
+            >
+              Login
+            </p>
+            <p
+              onClick={() => {
+                history.push("/sign-up");
+                handleCloseNavSide();
+              }}
+            >
+              Sign Up
+            </p>
+          </>
+        ) : (
+          <>
+            <p>My Profile</p>
+            <p
+              onClick={() => {
+                logout();
+                handleCloseNavSide();
+              }}
+            >
+              Log out
+            </p>
+          </>
+        )}
       </div>
-      <span className="header__navlist" onClick={handleOpenNavSide}>
-        &#9776;
-      </span>
     </div>
   );
 };

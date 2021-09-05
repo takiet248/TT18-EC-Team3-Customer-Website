@@ -19,8 +19,8 @@
   justify-content: space-between;
   &__logo {
     height: 70px;
-    width: 180px;
-    margin: 0 16px;
+    width: 200px;
+    margin-right: 16px;
     cursor: pointer;
     object-fit: contain;
     @include tablet {
@@ -32,16 +32,19 @@
   }
   &__logoMobile {
     display: none;
-    height: 50px;
-    width: 60px;
-    margin: 0 16px;
+    height: 60px;
+    width: 90px;
+    margin-right: 16px;
     cursor: pointer;
     object-fit: contain;
     @include tablet {
       display: block;
     }
     @include mobile {
-      display: none;
+      height: 30px;
+      width: 45px;
+      display: block;
+      object-fit: cover;
     }
   }
   &__noti {
@@ -65,16 +68,10 @@
     }
   }
   &__navlist {
-    display: none;
+    display: block;
     font-size: 30px;
     cursor: pointer;
     margin-left: 20px;
-    @include tablet {
-      display: block;
-    }
-    @include mobile {
-      display: block;
-    }
   }
   &__navside {
     height: 100%;

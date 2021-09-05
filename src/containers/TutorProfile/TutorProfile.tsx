@@ -61,7 +61,6 @@ export const TutorProfile = () => {
     dispatch(doGetOneTutor({ uid: uid }));
     dispatch(doGetTutorCourse({ uid: uid }));
     dispatch(doGetUserInfo());
-
     window.scrollTo({ top: 0, left: 0 });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

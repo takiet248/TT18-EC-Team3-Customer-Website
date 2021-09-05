@@ -3,7 +3,7 @@
 .introduction {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin: 4rem 0;
+  margin: 70px 0;
   align-items: center;
   justify-items: center;
   @include mobile {
