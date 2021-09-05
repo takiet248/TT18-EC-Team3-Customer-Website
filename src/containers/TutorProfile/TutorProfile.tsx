@@ -14,7 +14,7 @@ import {
   FaUserTie,
 } from "react-icons/fa";
 import { MdRecordVoiceOver } from "react-icons/md";
-import { translateDay } from "../../helpers";
+import { isAuth, translateDay } from "../../helpers";
 import { useParams } from "react-router";
 import { ScrollHorizontal } from "../../components/common/ScrollHorizontal/ScrollHorizontal";
 import { useAppDispatch } from "../../redux/store";
@@ -27,6 +27,7 @@ import {
   doFakeUnlikeCourse,
   doFakeUnlikeTutor,
   doGetOneTutor,
+  doGetRecommendedTutor,
   doGetTutorCourse,
   doGetUserInfo,
   doLikeCourse,
@@ -35,7 +36,7 @@ import {
   doUnlikeCourse,
   doUnlikeTutor,
 } from "../../redux";
-import { CourseItem, ModalVoting } from "../../components";
+import { CourseItem, ModalVoting, Tutor } from "../../components";
 import { useHistory } from "react-router-dom";
 import { EUser } from "../../constants";
 import { unwrapResult } from "@reduxjs/toolkit";
@@ -52,6 +53,9 @@ export const TutorProfile = () => {
   const tutorCourse = useSelector(
     (state: RootState) => state.courseSlice.tutorCourse
   );
+  const recommendedTutor = useSelector(
+    (state: RootState) => state.tutorSlice.recommendedTutor
+  );
   const userInfo = useSelector((state: RootState) => state.auth.userInfo);
   const [shown, setShown] = useState(false);
   const [rating, setRating] = useState(0);
@@ -61,6 +65,7 @@ export const TutorProfile = () => {
     dispatch(doGetOneTutor({ uid: uid }));
     dispatch(doGetTutorCourse({ uid: uid }));
     dispatch(doGetUserInfo());
+    dispatch(doGetRecommendedTutor({}));
     window.scrollTo({ top: 0, left: 0 });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -290,6 +295,48 @@ export const TutorProfile = () => {
               })}
           </ScrollHorizontal>
         </div>
+
+        {isAuth() === false ? (
+          <>
+            <div className="home__recommendation">
+              <Label
+                title="These tutor may suit you"
+                marginTop={16}
+              />
+              <ScrollHorizontal
+                marginBottom={16}
+                marginTop={16}
+                paddingBottom={8}
+              >
+                {recommendedTutor.map((item: any, index: number) => {
+                  return (
+                    <Tutor
+                      key={index}
+                      name={item.name}
+                      address={item.address}
+                      rating={item.rating}
+                      avatar={item.avatar}
+                      major={item.major}
+                      education={item.education}
+                      noLike={isFromListLikedTutor(item._id) ? 1 : 0}
+                      handleLikeUnlike={() => {
+                        if (isFromListLikedTutor(item._id) === false)
+                          return handleLikeTutor(item._id);
+                        else return handleUnlikeTutor(item._id);
+                      }}
+                      handleGotoDetail={() => {
+                        window.open(`/tutor/${item._id}`);
+                      }}
+                    />
+                  );
+                })}
+              </ScrollHorizontal>
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
+
         <ModalVoting
           isShow={shown}
           onClick={handleRate}

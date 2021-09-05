@@ -13,6 +13,7 @@ import {
   doFakeRateCourse,
   doFakeUnlikeCourse,
   doGetOneTutor,
+  doGetRecommendedCourse,
   doGetUserInfo,
   doLikeCourse,
   doRateCourse,
@@ -28,6 +29,8 @@ import {
 import { RiMoneyDollarBoxLine } from "react-icons/ri";
 import { EUser } from "../../constants";
 import { unwrapResult } from "@reduxjs/toolkit";
+import { ScrollHorizontal } from "../../components/common/ScrollHorizontal/ScrollHorizontal";
+import { isAuth } from "../../helpers";
 
 export const CourseProfile = () => {
   const dispatch = useAppDispatch();
@@ -39,6 +42,9 @@ export const CourseProfile = () => {
   const oneCourse = useSelector(
     (state: RootState) => state.courseSlice.oneCourse
   );
+  const recommendedCourse = useSelector(
+    (state: RootState) => state.courseSlice.recommendedCourse
+  );
   const [preTime, setPreTime] = useState(0);
   const [shown, setShown] = useState(false);
   const [rating, setRating] = useState(0);
@@ -49,6 +55,7 @@ export const CourseProfile = () => {
     dispatch(doGetOneCourse({ uid: courseid }));
     dispatch(doGetOneTutor({ uid: state?.tutorid }));
     dispatch(doGetUserInfo());
+    dispatch(doGetRecommendedCourse({}));
     window.scrollTo({ top: 0, left: 0 });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -211,17 +218,60 @@ export const CourseProfile = () => {
           </div>
         </div>
         {/* syllabus */}
-        <div className="course__syllabus">
-          <Label title="Syllabus" marginBottom={16} />
-          {oneCourse.syllabus?.map((item: any, index: any) => {
-            return (
-              <div className="course__syllabus-item" key={index}>
-                {index + 1}
-                <p>{item.item}</p>
-              </div>
-            );
-          })}
-        </div>
+        {oneCourse.syllabus === [] && (
+          <div className="course__syllabus">
+            <Label title="Syllabus" marginBottom={16} />
+            {oneCourse.syllabus?.map((item: any, index: any) => {
+              return (
+                <div className="course__syllabus-item" key={index}>
+                  {index + 1}
+                  <p>{item.item}</p>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {isAuth() === false ? (
+          <>
+            <div className="home__recommendation">
+              <Label title="These courses may suit you" marginTop={16} />
+              <ScrollHorizontal
+                paddingLeft={8}
+                marginBottom={16}
+                marginTop={16}
+                paddingBottom={8}
+              >
+                {recommendedCourse.map((item: any, index: number) => {
+                  return (
+                    <CourseItem
+                      key={index}
+                      name={item.name}
+                      avatar={item.avatar}
+                      durations={item.duration}
+                      rating={item.rating}
+                      subject={item.subject}
+                      level={item.level}
+                      price={item.price}
+                      noLike={isFromListLikedCourse(item._id) ? 1 : 0}
+                      handleLikeUnlike={() => {
+                        if (isFromListLikedCourse(item._id) === false)
+                          return handleLikeCourse(item._id);
+                        else return handleUnlikeCourse(item._id);
+                      }}
+                      onClick={() => {
+                        window.open(`/course/${item._id}`);
+                      }}
+                    />
+                  );
+                })}
+              </ScrollHorizontal>
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
+
         <ModalVoting
           isShow={shown}
           onClick={handleRate}

@@ -19,9 +19,8 @@
       grid-template-columns: 1fr;
     }
   }
-  &__recommendation{
-    padding: 0 5rem;
-    .tutor-item{
+  &__recommendation {
+    .tutor-item {
       cursor: pointer;
       // min-height: 280px;
       border-radius: 10px;
@@ -33,14 +32,6 @@
       min-height: 280px;
       max-height: 280px;
       width: 100%;
-    }
-    @include tablet{
-      padding: 0 3rem;
-
-    }
-    @include mobile{
-      padding: 0 1rem;
-
     }
   }
 }
