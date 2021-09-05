@@ -100,3 +100,11 @@ interface IResGetOneCourse {
 interface IResGetListAllCourse {
   result: Array<IResGetCourse>;
 }
+
+interface IResUserInfo {
+  DOB?: string;
+  address?: string;
+  email?: string;
+  like_course?: Array<{ cid?: string }>;
+  like_tutor?: Array<{ tid?: string }>;
+}

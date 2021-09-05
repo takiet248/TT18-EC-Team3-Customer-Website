@@ -21,12 +21,14 @@ import { useAppDispatch } from "../../redux/store";
 import { batch, useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
 import {
-  doFakeLikeUnlikeListCourse,
-  doFakeLikeUnlikeListTutor,
-  doFakeLikeUnlikeTutor,
+  doFakeLikeCourse,
+  doFakeLikeTutor,
   doFakeRateTutor,
+  doFakeUnlikeCourse,
+  doFakeUnlikeTutor,
   doGetOneTutor,
   doGetTutorCourse,
+  doGetUserInfo,
   doLikeCourse,
   doLikeTutor,
   doRateTutor,
@@ -36,6 +38,7 @@ import {
 import { CourseItem, ModalVoting } from "../../components";
 import { useHistory } from "react-router-dom";
 import { EUser } from "../../constants";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 export const TutorProfile = () => {
   const dispatch = useAppDispatch();
@@ -49,6 +52,7 @@ export const TutorProfile = () => {
   const tutorCourse = useSelector(
     (state: RootState) => state.courseSlice.tutorCourse
   );
+  const userInfo = useSelector((state: RootState) => state.auth.userInfo);
   const [shown, setShown] = useState(false);
   const [rating, setRating] = useState(0);
 
@@ -56,6 +60,8 @@ export const TutorProfile = () => {
   useEffect(() => {
     dispatch(doGetOneTutor({ uid: uid }));
     dispatch(doGetTutorCourse({ uid: uid }));
+    dispatch(doGetUserInfo());
+
     window.scrollTo({ top: 0, left: 0 });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -74,7 +80,7 @@ export const TutorProfile = () => {
   const onChangePreAndNext = (month: any, year: any) => {};
 
   //handleLike
-  const handleLike = (_id: string) => {
+  const handleLikeTutor = (_id: string) => {
     const nowTime = Date.now();
     setPreTime(nowTime);
     if (nowTime - preTime < 250) {
@@ -82,13 +88,12 @@ export const TutorProfile = () => {
     }
     batch(() => {
       dispatch(doLikeTutor({ user: userid, tid: _id }));
-      dispatch(doFakeLikeUnlikeTutor({ noLike: 1 }));
-      dispatch(doFakeLikeUnlikeListTutor({ _id: _id, noLike: 1 }));
+      dispatch(doFakeLikeTutor({ _id: _id }));
     });
   };
 
   //handle unLike
-  const handleUnlike = (_id: string) => {
+  const handleUnlikeTutor = (_id: string) => {
     const nowTime = Date.now();
     setPreTime(nowTime);
     if (nowTime - preTime < 250) {
@@ -96,8 +101,7 @@ export const TutorProfile = () => {
     }
     batch(() => {
       dispatch(doUnlikeTutor({ user: userid, tid: _id }));
-      dispatch(doFakeLikeUnlikeTutor({ noLike: 0 }));
-      dispatch(doFakeLikeUnlikeListTutor({ _id: _id, noLike: 0 }));
+      dispatch(doFakeUnlikeTutor({ _id: _id }));
     });
   };
 
@@ -110,7 +114,7 @@ export const TutorProfile = () => {
     }
     batch(() => {
       dispatch(doLikeCourse({ user: userid, cid: _id }));
-      dispatch(doFakeLikeUnlikeListCourse({ _id: _id, noLike: 1 }));
+      dispatch(doFakeLikeCourse({ _id: _id }));
     });
   };
   //handleLike course
@@ -122,24 +126,47 @@ export const TutorProfile = () => {
     }
     batch(() => {
       dispatch(doUnlikeCourse({ user: userid, cid: _id }));
-      dispatch(doFakeLikeUnlikeListCourse({ _id: _id, noLike: 0 }));
+      dispatch(doFakeUnlikeCourse({ _id: _id }));
     });
   };
 
   //handle rate
   const handleRate = () => {
-    dispatch(doRateTutor({ tid: uid, rate: rating }));
-    dispatch(doFakeRateTutor({ rating: rating }));
+    dispatch(doRateTutor({ tid: uid, rate: rating }))
+      .then(unwrapResult)
+      .then((res: any) => {
+        if (res) dispatch(doFakeRateTutor({ rating: res.rating }));
+      });
     setShown(false);
   };
 
+  // is liked tutor
+  const isFromListLikedTutor = (_id?: string) => {
+    if (userInfo.like_tutor?.some((e) => e.tid === _id)) {
+      return true;
+    } else return false;
+  };
+
+  // is liked Course
+  const isFromListLikedCourse = (_id?: string) => {
+    if (userInfo.like_course?.some((e) => e.cid === _id)) {
+      return true;
+    } else return false;
+  };
   return (
     <div className="tutor-container">
       <div className="tutor">
         {/* header */}
         <div className="tutor__header">
           <div className="tutor__info">
-            <Avatar image={oneTutor.avatar} height={80} width={80} />
+            <Avatar
+              image={
+                oneTutor.avatar ||
+                "https://p.bigstockphoto.com/vVu7XprxSayr867oA3KQ_bigstock-Colorful-fruit-pattern-of-fres-282127069.jpg"
+              }
+              height={80}
+              width={80}
+            />
             <div className="tutor__first">
               <div className="tutor__name">
                 <p>{oneTutor.name}</p>
@@ -169,10 +196,11 @@ export const TutorProfile = () => {
           </div>
           <div className="tutor__selection-item">
             <HeartIcon
-              noLike={oneTutor.noLike}
+              noLike={isFromListLikedTutor(oneTutor._id) ? 1 : 0}
               onClick={() => {
-                if (oneTutor.noLike === 0) return handleLike(uid);
-                else return handleUnlike(uid);
+                if (isFromListLikedTutor(oneTutor._id) === false)
+                  return handleLikeTutor(oneTutor._id!);
+                else return handleUnlikeTutor(oneTutor._id!);
               }}
             />
             <p>Like</p>
@@ -246,9 +274,10 @@ export const TutorProfile = () => {
                     subject={item.subject}
                     level={item.level}
                     price={item.price}
-                    noLike={item.noLike}
+                    noLike={isFromListLikedCourse(item._id) ? 1 : 0}
                     handleLikeUnlike={() => {
-                      if (item.noLike === 0) return handleLikeCourse(item._id);
+                      if (isFromListLikedCourse(item._id) === false)
+                        return handleLikeCourse(item._id);
                       else return handleUnlikeCourse(item._id);
                     }}
                     onClick={() => {

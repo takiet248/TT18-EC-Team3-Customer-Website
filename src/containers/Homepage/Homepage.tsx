@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "./Homepage.scss";
-import { Banner, Introduction, Tutor, CourseItem } from "../../components";
+import { Banner, Introduction, Tutor } from "../../components";
 import { batch, useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
 import { useAppDispatch } from "../../redux/store";
 import {
-  doFakeLikeUnlikeListCourse,
-  doFakeLikeUnlikeListTutor,
+  doFakeLikeTutor,
+  doFakeUnlikeTutor,
   doGetAllListTutor,
-  doGetRecommendedCourse,
-  doGetRecommendedTutor,
-  doLikeCourse,
+  doGetUserInfo,
   doLikeTutor,
-  doUnlikeCourse,
   doUnlikeTutor,
 } from "../../redux";
 import { useHistory } from "react-router";
-import { ScrollHorizontal } from "../../components/common/ScrollHorizontal/ScrollHorizontal";
-import { Label } from "../../components/common";
 import { EUser } from "../../constants";
 
 export const Homepage: React.FC = () => {
@@ -26,19 +21,13 @@ export const Homepage: React.FC = () => {
   const listAllTutor = useSelector(
     (state: RootState) => state.tutorSlice.listAllTutor
   );
-  const recommendedTutor = useSelector(
-    (state: RootState) => state.tutorSlice.recommendedTutor
-  );
-  const recommendedCourse = useSelector(
-    (state: RootState) => state.courseSlice.recommendedCourse
-  );
+  const userInfo = useSelector((state: RootState) => state.auth.userInfo);
   const userid = localStorage.getItem(EUser.userid);
   const [preTime, setPreTime] = useState(0);
 
   useEffect(() => {
     dispatch(doGetAllListTutor());
-    dispatch(doGetRecommendedTutor({}));
-    dispatch(doGetRecommendedCourse({}));
+    dispatch(doGetUserInfo());
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   //handleLike tutor
@@ -50,10 +39,10 @@ export const Homepage: React.FC = () => {
     }
     batch(() => {
       dispatch(doLikeTutor({ user: userid, tid: _id }));
-      dispatch(doFakeLikeUnlikeListTutor({ _id: _id, noLike: 1 }));
+      dispatch(doFakeLikeTutor({ _id: _id }));
     });
   };
-  //handleLike tutor
+  //handle unLike tutor
   const handleUnlikeTutor = (_id?: string) => {
     const nowTime = Date.now();
     setPreTime(nowTime);
@@ -62,33 +51,14 @@ export const Homepage: React.FC = () => {
     }
     batch(() => {
       dispatch(doUnlikeTutor({ user: userid, tid: _id }));
-      dispatch(doFakeLikeUnlikeListTutor({ _id: _id, noLike: 0 }));
+      dispatch(doFakeUnlikeTutor({ _id: _id }));
     });
   };
-
-  //handleLike course
-  const handleLikeCourse = (_id?: string) => {
-    const nowTime = Date.now();
-    setPreTime(nowTime);
-    if (nowTime - preTime < 250) {
-      return;
-    }
-    batch(() => {
-      dispatch(doLikeCourse({ user: userid, cid: _id }));
-      dispatch(doFakeLikeUnlikeListCourse({ _id: _id, noLike: 1 }));
-    });
-  };
-  //handleLike course
-  const handleUnlikeCourse = (_id?: string) => {
-    const nowTime = Date.now();
-    setPreTime(nowTime);
-    if (nowTime - preTime < 250) {
-      return;
-    }
-    batch(() => {
-      dispatch(doUnlikeCourse({ user: userid, cid: _id }));
-      dispatch(doFakeLikeUnlikeListCourse({ _id: _id, noLike: 0 }));
-    });
+  // is liked
+  const isFromLikeList = (_id?: string) => {
+    if (userInfo.like_tutor?.some((e) => e.tid === _id)) {
+      return true;
+    } else return false;
   };
 
   return (
@@ -106,9 +76,10 @@ export const Homepage: React.FC = () => {
             avatar={item.avatar}
             major={item.major}
             education={item.education}
-            noLike={item.noLike}
+            noLike={isFromLikeList(item._id) ? 1 : 0}
             handleLikeUnlike={() => {
-              if (item.noLike === 0) return handleLikeTutor(item._id);
+              if (isFromLikeList(item._id) === false)
+                return handleLikeTutor(item._id);
               else return handleUnlikeTutor(item._id);
             }}
             handleGotoDetail={() => {
@@ -117,7 +88,7 @@ export const Homepage: React.FC = () => {
           />
         ))}
       </div>
-      <div className="home__recommendation">
+      {/* <div className="home__recommendation">
         <Label title="These courses are recommended for you" />
         <ScrollHorizontal
           paddingLeft={8}
@@ -151,9 +122,9 @@ export const Homepage: React.FC = () => {
               );
             })}
         </ScrollHorizontal>
-      </div>
+      </div> */}
 
-      <div className="home__recommendation">
+      {/* <div className="home__recommendation">
         <Label title="These tutor are recommended for you" />
         <ScrollHorizontal
           paddingLeft={8}
@@ -184,7 +155,7 @@ export const Homepage: React.FC = () => {
               );
             })}
         </ScrollHorizontal>
-      </div>
+      </div> */}
       <Introduction />
     </div>
   );

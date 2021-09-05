@@ -1,3 +1,4 @@
+import { objToQuery } from "./../../helpers/common";
 import axiosAuth from "./axiosAuth";
 
 const baseURL = "customer/";
@@ -16,11 +17,11 @@ export const apiAuth = {
   },
   recommendTutor: (params: any) => {
     const url = baseURL + "recommend/tutor";
-    return axiosAuth.post(url, params);
+    return axiosAuth.get(url + objToQuery(params));
   },
   recommendCourse: (params: any) => {
     const url = baseURL + "recommend/course";
-    return axiosAuth.post(url, params);
+    return axiosAuth.get(url + objToQuery(params));
   },
   likeTutor: (params: { user: string | null; tid?: string }) => {
     const url = baseURL + "tutor/like";

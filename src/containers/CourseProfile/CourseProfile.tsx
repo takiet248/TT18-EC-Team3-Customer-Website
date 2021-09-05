@@ -9,10 +9,11 @@ import { batch, useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
 import { doGetOneCourse } from "../../redux/asyncAction/course";
 import {
-  doFakeLikeUnlikeCourse,
-  doFakeLikeUnlikeListCourse,
+  doFakeLikeCourse,
   doFakeRateCourse,
+  doFakeUnlikeCourse,
   doGetOneTutor,
+  doGetUserInfo,
   doLikeCourse,
   doRateCourse,
   doUnlikeCourse,
@@ -26,6 +27,7 @@ import {
 } from "react-icons/ai";
 import { RiMoneyDollarBoxLine } from "react-icons/ri";
 import { EUser } from "../../constants";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 export const CourseProfile = () => {
   const dispatch = useAppDispatch();
@@ -40,14 +42,18 @@ export const CourseProfile = () => {
   const [preTime, setPreTime] = useState(0);
   const [shown, setShown] = useState(false);
   const [rating, setRating] = useState(0);
+  const userInfo = useSelector((state: RootState) => state.auth.userInfo);
+
+  //init
   useEffect(() => {
     dispatch(doGetOneCourse({ uid: courseid }));
     dispatch(doGetOneTutor({ uid: state?.tutorid }));
+    dispatch(doGetUserInfo());
     window.scrollTo({ top: 0, left: 0 });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   //handleLike
-  const handleLike = (_id: string) => {
+  const handleLikeCourse = (_id: string) => {
     const nowTime = Date.now();
     setPreTime(nowTime);
     if (nowTime - preTime < 250) {
@@ -55,13 +61,19 @@ export const CourseProfile = () => {
     }
     batch(() => {
       dispatch(doLikeCourse({ user: userid, cid: _id }));
-      dispatch(doFakeLikeUnlikeCourse({ noLike: 1 }));
-      dispatch(doFakeLikeUnlikeListCourse({ _id: _id, noLike: 1 }));
+      dispatch(doFakeLikeCourse({ _id: _id }));
     });
   };
 
+  // is liked Course
+  const isFromListLikedCourse = (_id?: string) => {
+    if (userInfo.like_course?.some((e) => e.cid === _id)) {
+      return true;
+    } else return false;
+  };
+
   //handle unLike
-  const handleUnlike = (_id: string) => {
+  const handleUnlikeCourse = (_id: string) => {
     const nowTime = Date.now();
     setPreTime(nowTime);
     if (nowTime - preTime < 250) {
@@ -69,8 +81,7 @@ export const CourseProfile = () => {
     }
     batch(() => {
       dispatch(doUnlikeCourse({ user: userid, cid: _id }));
-      dispatch(doFakeLikeUnlikeCourse({ noLike: 0 }));
-      dispatch(doFakeLikeUnlikeListCourse({ _id: _id, noLike: 0 }));
+      dispatch(doFakeUnlikeCourse({ _id: _id }));
     });
   };
   //get rating
@@ -80,8 +91,12 @@ export const CourseProfile = () => {
 
   //handle rate
   const handleRate = () => {
-    dispatch(doRateCourse({ cid: courseid, rate: rating }));
-    dispatch(doFakeRateCourse({ rating: rating }));
+    dispatch(doRateCourse({ cid: courseid, rate: rating }))
+      .then(unwrapResult)
+      .then((res: any) => {
+        if (res) dispatch(doFakeRateCourse({ rating: res.rating }));
+      });
+
     setShown(false);
   };
 
@@ -180,10 +195,11 @@ export const CourseProfile = () => {
           </div>
           <div className="tutor__selection-item">
             <HeartIcon
-              noLike={oneCourse.noLike}
+              noLike={isFromListLikedCourse(oneCourse._id) ? 1 : 0}
               onClick={() => {
-                if (oneCourse.noLike === 0) return handleLike(courseid);
-                else return handleUnlike(courseid);
+                if (isFromListLikedCourse(oneCourse._id) === false)
+                  return handleLikeCourse(oneCourse._id!);
+                else return handleUnlikeCourse(oneCourse._id!);
               }}
             />
             <p>Like</p>
