@@ -160,15 +160,16 @@ export const CourseProfile = () => {
             <Label
               icon={<AiOutlineBook size={20} />}
               title={
-                <div>
+                <span style={{ fontSize: 18 }}>
+                  Subject:{" "}
                   {oneCourse.subject?.map((item: any, index: number) => {
                     return (
                       <span className="course__subject" key={index}>
-                        Subject: {item.item} .
+                        {item.item} .{" "}
                       </span>
                     );
                   })}
-                </div>
+                </span>
               }
               marginBottom={16}
               marginTop={16}
