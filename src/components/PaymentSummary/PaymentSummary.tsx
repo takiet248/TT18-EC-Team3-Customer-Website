@@ -7,6 +7,7 @@ export const PaymentSummary: React.FC<IPaymentSummary> = ({
   total,
 }) => {
   return (
+    <div style={{display:"flex",justifyContent:"center"}}>
     <div className="payment-summary">
       <h1>Summary</h1>
       <div className="payment-summary__calculation">
@@ -23,6 +24,7 @@ export const PaymentSummary: React.FC<IPaymentSummary> = ({
           <span className="bold">${total}</span>
         </div>
       </div>
+    </div>
     </div>
   );
 };
