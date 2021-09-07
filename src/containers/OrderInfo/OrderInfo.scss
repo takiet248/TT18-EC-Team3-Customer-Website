@@ -1,28 +1,16 @@
-@import '../../assets/scss/variable.scss';
+@import "../../assets/scss/variable.scss";
 .order-info {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin: 70px 0;
-  @include tablet{
-    grid-template-columns: 1fr;
-  }
+  // display: grid;
+  // margin: 70px 0;
+
   .order-info__details {
     display: flex;
     justify-content: center;
   }
-  .order-info__summary {
-    width: 60%;
-    margin: 0 auto;
-    .back-to-home-button {
-      button {
-        font : {
-          size: 16px;
-          weight: 500;
-          family: "Quicksand", sans-serif;
-        }
-        margin: 0 auto;
-        width: 300px;
-      }
-    }
+  &__button {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
   }
 }

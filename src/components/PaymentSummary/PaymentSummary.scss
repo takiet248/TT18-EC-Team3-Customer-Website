@@ -1,7 +1,13 @@
+@import "../../assets/scss/variable.scss";
 .payment-summary {
+  width: 400px;
+  @include tablet {
+    width: 100%;
+    padding: 0 3rem;
+  }
   h1 {
     font: {
-      size: 24px;
+      size: 20px;
       weight: 500;
     }
     line-height: 40px;
@@ -14,7 +20,7 @@
       justify-content: space-between;
       span {
         font: {
-          size: 20px;
+          size: 16px;
           weight: 400;
         }
         line-height: 25px;

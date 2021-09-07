@@ -1,7 +1,32 @@
 @import "../../assets/scss/variable.scss";
 .paymentMethod-container {
   margin-bottom: 100px;
+  &__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include mobile {
+      flex-direction: column;
+    }
+    .tutor-item {
+      min-width: 240px;
+      max-width: 240px;
 
+      min-height: 280px;
+      &__action {
+        display: none;
+      }
+      margin: 8px;
+    }
+    .course-item {
+      &__action {
+        display: none;
+      }
+      min-height: 280px;
+      margin: 8px;
+    }
+  }
+ 
   .paymentMethod__method {
     margin: 20px 0;
     display: flex;
@@ -16,7 +41,7 @@
     }
     span {
       font: {
-        size: 22px;
+        size: 18px;
         weight: 700;
       }
       line-height: 30px;
@@ -32,26 +57,16 @@
       width: 100%;
       padding: 0 3rem;
     }
+    .input {
+      width: 300px;
+    }
     margin: 0 auto;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    button {
-      text-transform: uppercase;
-    }
-    label {
-      font: {
-        size: 22px;
-        weight: 300;
-      }
-    }
-    div {
-      margin: 0;
-      width: 50%;
-    }
   }
   .paymentMethod__summary {
-    width: 70%;
+    width: 400px;
     @include tablet {
       width: 100%;
       padding: 0 2rem;
@@ -66,7 +81,6 @@
       text-transform: uppercase;
       display: block;
       font : {
-        size: 18px;
         weight: 500;
       }
       margin: 0 auto;
